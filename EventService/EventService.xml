@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EventService</name>
+    </assembly>
+    <members>
+        <member name="M:EventService.EntityActivities.EventActiv.EventController.GETALL">
+            <summary>
+            Method returns Collection and status code
+            </summary>
+        </member>
+        <member name="M:EventService.EntityActivities.EventActiv.EventController.POST(EventService.Features.Event.RequestCreateEventModel)">
+            <summary>
+            Method Creates an Event and returns bool value and status code
+            </summary>
+            <response code="200">Event has been created</response>
+            <response code="400">Invalid values</response>
+        </member>
+        <member name="M:EventService.EntityActivities.EventActiv.EventController.PUT(System.String,EventService.Features.Event.UpdateEventModel)">
+            <summary>
+            Medthod Updates specific Event by id and returns bool value and status code
+            </summary>
+            <response code="200">Event has been updated</response>
+            <response code="400">Invalid values</response>
+            <param name="id">string id of Event</param>
+        </member>
+        <member name="M:EventService.EntityActivities.EventActiv.EventController.DELETE(System.String)">
+            <summary>
+            Method Removes particular Event by id and returns bool value and status code
+            </summary>
+            <response code="200">Event has been removed by specific id</response>
+            <response code="400">Invalid values</response>
+            <param name="id">string id of Event</param>
+        </member>
+        <member name="M:EventService.EntityActivities.EventActiv.EventController.GETALLFORTHEWEEK">
+            <summary>
+            Returns All Event for the current week and status code
+            </summary>
+        </member>
+    </members>
+</doc>
