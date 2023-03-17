@@ -9,12 +9,12 @@ namespace EventService.Features.Stub
     [ApiController]
     public class StubController : ControllerBase
     {
-       
+
 
         // POST api/<StubController>
-        [HttpPost("authstub")]
         [Authorize]
-        public string Post([FromBody] string value)
+        [HttpPost("authstub")]
+        public string Post()
         {
             return "hello";
         }

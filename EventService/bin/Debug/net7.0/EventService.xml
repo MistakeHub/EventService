@@ -4,11 +4,6 @@
         <name>EventService</name>
     </assembly>
     <members>
-        <member name="T:EventService.Features.Event.Commands.Create.CreateEventCommandRequestHandler">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="M:EventService.Features.Event.EventController.GETALL">
             <summary>
             Method returns Collection and status code

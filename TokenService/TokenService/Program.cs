@@ -1,4 +1,5 @@
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using TokenService.Helpers;
 
@@ -27,11 +28,21 @@ app.UseAuthorization();
 app.MapGet("/token", (string username, string password) =>
 {
 
+    var claims = new List<Claim>
+    {
+        new Claim(ClaimsIdentity.DefaultNameClaimType, username),
+       
+
+    };
+    ClaimsIdentity claimsIdentity =
+        new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
+            null);
+   
     var jwt = new JwtSecurityToken(
         issuer: AuthOptions.ISSUER,
         audience: AuthOptions.AUDIENCE,
         notBefore: DateTime.UtcNow,
-
+        claims:claimsIdentity.Claims,
         expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
         signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
     var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);

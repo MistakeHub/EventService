@@ -14,8 +14,8 @@ namespace EventService.Helpers
     {
         public static void AddServices(this IServiceCollection services, IConfiguration appconfig)
         {
-            var asdads = appconfig["Audience"];
 
+            var dasdas = appconfig["Key"];
 
             services.AddControllers().AddFluentValidation(options => { options.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()); });
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

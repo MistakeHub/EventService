@@ -1118,11 +1118,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Shawn\\source\\repos\\TokenService\\TokenService\\TokenService.csproj",
+      "projectUniqueName": "C:\\Users\\Shawn\\OpporRepositories\\EventService\\TokenService\\TokenService\\TokenService.csproj",
       "projectName": "TokenService",
-      "projectPath": "C:\\Users\\Shawn\\source\\repos\\TokenService\\TokenService\\TokenService.csproj",
+      "projectPath": "C:\\Users\\Shawn\\OpporRepositories\\EventService\\TokenService\\TokenService\\TokenService.csproj",
       "packagesPath": "C:\\Users\\Shawn\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Shawn\\source\\repos\\TokenService\\TokenService\\obj\\",
+      "outputPath": "C:\\Users\\Shawn\\OpporRepositories\\EventService\\TokenService\\TokenService\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
