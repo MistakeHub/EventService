@@ -1,30 +1,31 @@
-﻿using EventService.EntityActivities.EventActiv.Commands.Remove;
-using EventService.Helpers;
+﻿
 using EventService.Models.Interfaces;
+using FluentValidation;
 using MediatR;
+using SC.Internship.Common.Exceptions;
+using SC.Internship.Common.ScResult;
 
-namespace EventService.EntityActivities.EventActiv.Commands.Update
+namespace EventService.Features.Event.Commands.Update
 {
-    public class UpdateEventCommandRequestHandler : IRequestHandler<UpdateEventCommand, ReturnResult>
+    // ReSharper disable once UnusedMember.Global Решарпер рекомендует удалить, так как он не используется
+    public class UpdateEventCommandRequestHandler : IRequestHandler<UpdateEventCommand, ScResult<string>>
     {
-        private IBaseEventService _baseEventService;
+        private readonly IBaseEventService _baseEventService;
         public UpdateEventCommandRequestHandler(IBaseEventService baseEventService) { _baseEventService = baseEventService; }
-        public async Task<ReturnResult> Handle(UpdateEventCommand request, CancellationToken cancellationToken)
+        public Task<ScResult<string>> Handle(UpdateEventCommand request, CancellationToken cancellationToken)
         {
-            ReturnResult returnresult=new ReturnResult();
+            ScResult<string> returnresult = new ScResult<string>();
 
             UpdateEventCommandValidation validator = new UpdateEventCommandValidation();
-            var error = validator.Validate(request).Errors.FirstOrDefault();
-            if (error != null)
-            {
-                returnresult.Data = error.ErrorMessage;
-                returnresult.StatusCode = (int)StatuseCode.BadRequest;
-                return returnresult;
-            }
+            var validationResult = validator.Validate(request);
+            if (!validationResult.IsValid) throw new ScException(new ValidationException(validationResult.Errors), "ValidaitonException");
+
+
             var resultupdate = _baseEventService.UpdateEvent(request.Id, request.Start, request.End, request.Title, request.Description, request.IdImage, request.IdSpace);
-            returnresult.Data = resultupdate ? "Мероприятие было обновлено" : "Мероприятие не было создано";
-            returnresult.StatusCode = resultupdate ? (int)StatuseCode.Success : (int)StatuseCode.Unprocessable;
-            return returnresult;
+            if (!resultupdate) throw new ScException("Мероприятие не было обновлено");
+            returnresult.Result=  "Мероприятие было обновлено";
+  
+            return Task.FromResult(returnresult);
         }
     }
 }

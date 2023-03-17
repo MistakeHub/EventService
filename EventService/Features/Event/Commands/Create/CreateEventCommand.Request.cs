@@ -1,9 +1,11 @@
-﻿using EventService.Helpers;
+﻿
 using MediatR;
+using SC.Internship.Common.ScResult;
 
-namespace EventService.EntityActivities.EventActiv.Commands.Create
+namespace EventService.Features.Event.Commands.Create
 {
-    public class CreateEventCommand:IRequest<ReturnResult>
+
+    public class CreateEventCommand:IRequest<ScResult<string>>
     {
         public DateTime Start { get; set; }
         public DateTime End { get; set; }

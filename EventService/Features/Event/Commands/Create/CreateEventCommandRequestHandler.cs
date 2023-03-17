@@ -1,33 +1,37 @@
-﻿using EventService.Helpers;
+﻿
 using EventService.Models.Interfaces;
 using FluentValidation;
+using FluentValidation.Results;
 using MediatR;
-using System.ComponentModel.DataAnnotations;
+using SC.Internship.Common.Exceptions;
+using SC.Internship.Common.ScResult;
 
-namespace EventService.EntityActivities.EventActiv.Commands.Create
+namespace EventService.Features.Event.Commands.Create
 {
-    public class CreateEventCommandRequestHandler : IRequestHandler<CreateEventCommand, ReturnResult>
+    // ReSharper disable once UnusedMember.Global Решарпер рекомендует удалить, так как он не используется
+    public class CreateEventCommandRequestHandler : IRequestHandler<CreateEventCommand, ScResult<string>>
     {
-        private IBaseEventService _baseEventService;
+        private readonly IBaseEventService _baseEventService;
 
         public CreateEventCommandRequestHandler(IBaseEventService baseEventService) { _baseEventService= baseEventService; }
-        public async Task<ReturnResult> Handle(CreateEventCommand request, CancellationToken cancellationToken)
+        public Task<ScResult<string>> Handle(CreateEventCommand request, CancellationToken cancellationToken)
         {
-            ReturnResult returnresult = new ReturnResult();
-            CreateEventCommandValidation validator= new CreateEventCommandValidation();
-           var error =validator.Validate(request).Errors.FirstOrDefault();
-            if (error !=null)
-            {
-               
-                returnresult.Data = error.ErrorMessage;
-                returnresult.StatusCode = (int)StatuseCode.BadRequest;
-                return returnresult;
-            }
-            var resultofadd = _baseEventService.CreateEvent(request.Start, request.End, request.Title, request.Description, request.IdImage, request.IdSpace);
+          
+            CreateEventCommandValidation validator = new CreateEventCommandValidation();
+            ValidationResult validationResult = null;
+        
+                validationResult = validator.Validate(request);
+                if (!validationResult.IsValid) throw new ScException(new ValidationException(validationResult.Errors), "ValidationException");
+             
 
-            returnresult.Data= resultofadd? "Мероприятие было создано":"Мероприятие не было обновлено" ;
-            returnresult.StatusCode = resultofadd ? (int)StatuseCode.Created : (int)StatuseCode.Unprocessable;
-            return returnresult;
+
+                var resultofadd = _baseEventService.CreateEvent(request.Start, request.End, request.Title,
+                    request.Description, request.IdImage, request.IdSpace);
+                if (!resultofadd) throw new ScException("Мероприятие не было создано");
+
+            ScResult<string> returnresult  =new ScResult<string>("Мероприятие было создано")  ;
+                
+            return Task.FromResult(returnresult);
 
            
 

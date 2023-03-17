@@ -1,9 +1,10 @@
-﻿using EventService.Helpers;
+﻿
 using MediatR;
+using SC.Internship.Common.ScResult;
 
-namespace EventService.EntityActivities.EventActiv.Commands.Update
+namespace EventService.Features.Event.Commands.Update
 {
-    public class UpdateEventCommand:IRequest<ReturnResult>
+    public class UpdateEventCommand:IRequest<ScResult<string>>
     {
         public Guid Id { get; set; }
 

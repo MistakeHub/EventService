@@ -1,22 +1,24 @@
 ﻿using AutoMapper;
-using EventService.Helpers;
+
 using EventService.Models.Interfaces;
 using EventService.Models.ViewModels;
 using MediatR;
+using SC.Internship.Common.ScResult;
 
-namespace EventService.EntityActivities.EventActiv.Commands.GetAllForTheWeek
+namespace EventService.Features.Event.Commands.GetAllForTheWeek
 {
-    public class GetAllEventsForTheWeekCommandQueryHandler : IRequestHandler<GetAllEventsForTheWeekCommand, ReturnResult>
+    // ReSharper disable once UnusedMember.Global Решарпер рекомендует удалить, так как он не используется
+    public class GetAllEventsForTheWeekCommandQueryHandler : IRequestHandler<GetAllEventsForTheWeekCommand, ScResult<List<EventViewModel>>>
     {
-        private IBaseEventService _baseEventService;
-        private IMapper _mapper;
+        private readonly IBaseEventService _baseEventService;
+        private readonly IMapper _mapper;
         public GetAllEventsForTheWeekCommandQueryHandler(IBaseEventService baseEventService, IMapper mapper) { _baseEventService=baseEventService; _mapper = mapper; }
-        public async Task<ReturnResult> Handle(GetAllEventsForTheWeekCommand request, CancellationToken cancellationToken)
+        public Task<ScResult<List<EventViewModel>>> Handle(GetAllEventsForTheWeekCommand request, CancellationToken cancellationToken)
         {
             var returnget = _baseEventService.GetAllEventsForTheWeek();
             var events = _mapper.Map<List<EventViewModel>>(returnget);
 
-            return new ReturnResult() { Data = events, StatusCode = (int)StatuseCode.Success };
+            return Task.FromResult(new ScResult<List<EventViewModel>>(){Result = events});
         }
     }
 }

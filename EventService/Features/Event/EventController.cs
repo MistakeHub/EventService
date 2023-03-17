@@ -1,39 +1,46 @@
-﻿using EventService.EntityActivities.EventActiv.Commands.Create;
-using EventService.EntityActivities.EventActiv.Commands.GetAll;
-using EventService.EntityActivities.EventActiv.Commands.GetAllForTheWeek;
-using EventService.EntityActivities.EventActiv.Commands.Remove;
-using EventService.EntityActivities.EventActiv.Commands.Update;
-using EventService.EntityActivities.ImageActiv.Commands.IsExists;
-using EventService.EntityActivities.SpaceActiv.Commands.IsExists;
-using EventService.Helpers;
+﻿using EventService.Features.Event.Commands.Create;
+using EventService.Features.Event.Commands.GetAll;
+using EventService.Features.Event.Commands.GetAllForTheWeek;
+using EventService.Features.Event.Commands.HaveATicket;
+using EventService.Features.Event.Commands.IssueATicket;
+using EventService.Features.Event.Commands.Remove;
+using EventService.Features.Event.Commands.SetTickets;
+using EventService.Features.Event.Commands.Update;
+using EventService.Features.Filters;
+using EventService.Features.Image.Commands.IsExists;
+using EventService.Features.Space.Commands.IsExists;
 using EventService.Models.Entities;
+using EventService.Models.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using EventService.Features.Event;
+using SC.Internship.Common.ScResult;
+
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace EventService.EntityActivities.EventActiv
+namespace EventService.Features.Event
 {
     [Route("api/[action]/events")]
     [ApiController]
+    [ExceptionFilter]
     public class EventController : ControllerBase
     {
 
 
-        private IMediator _mediator;
+        private readonly IMediator _mediator;
 
         public EventController(IMediator mediator) { _mediator = mediator; }
         /// <summary>
         /// Method returns Collection and status code
         /// </summary>
-        [ProducesResponseType(typeof(List<Event>), 200)]
+        [ProducesResponseType(typeof(List<Models.Entities.Event>), 200)]
+        [ProducesResponseType(typeof(JsonResult), 400)]
 
         [HttpGet]
-        public async Task<ObjectResult> GETALL()
+        public async Task<ScResult<List<EventViewModel>>> GETALL()
         {
             var result = await _mediator.Send(new GetAllEventsCommand());
-            return new ObjectResult(result.Data) { StatusCode = result.StatusCode };
+            return result;
         }
 
         /// <summary>
@@ -46,22 +53,25 @@ namespace EventService.EntityActivities.EventActiv
 
         // POST api/<EventController>
         [HttpPost]
-        [ProducesResponseType(typeof(bool), 200)]
-        public async Task<ObjectResult> POST([FromBody] RequestCreateEventModel model)
+        [ProducesResponseType(typeof(string), 200)]
+        public async Task<ScResult<string>> Post([FromBody] RequestCreateEventModel model)
         {
-
-
             var checkspace = await _mediator.Send(new SpaceExistsCommand() { Id = Guid.Parse(model.IdSpace) });
 
-            if (!(bool)checkspace.Data) return new ObjectResult(checkspace.Data) { StatusCode = checkspace.StatusCode };
+            ScResult<string> result=null;
 
             var checkimage = await _mediator.Send(new ImageExistsCommand() { Id = Guid.Parse(model.IdImage) });
+            if (checkimage.Result && checkspace.Result)
+            {
+                 result = await _mediator.Send(new CreateEventCommand()
+                {
+                    Start = model.Start, End = model.End, Title = model.Title, Description = model.Description,
+                    IdImage = Guid.Parse(model.IdImage), IdSpace = Guid.Parse(model.IdSpace)
+                });
 
-            if (!(bool)checkimage.Data) return new ObjectResult(checkimage.Data) { StatusCode = checkimage.StatusCode };
+            }
 
-            var result = await _mediator.Send(new CreateEventCommand() { Start = model.Start, End = model.End, Title = model.Title, Description = model.Description, IdImage = Guid.Parse(model.IdImage), IdSpace = Guid.Parse(model.IdSpace) });
-
-            return new ObjectResult(result.Data) { StatusCode = result.StatusCode };
+            return result;
 
  
 
@@ -75,28 +85,28 @@ namespace EventService.EntityActivities.EventActiv
         /// <param name="id">string id of Event</param>
         /// <param name="model">Test value for idImage and idSpace:7febf16f-651b-43b0-a5e3-0da8da49e90d </param>
         [HttpPut("{id}")]
-         [ProducesResponseType(typeof(bool), 200)]
+         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
-        public async Task<ObjectResult> PUT(string id,[FromBody] UpdateEventModel model)
+        public async Task<ScResult<string>> Put(string id,[FromBody] UpdateEventModel model)
         {
           
             if (model.IdSpace != null)
             {
                 var checkspace = await _mediator.Send(new SpaceExistsCommand() { Id = Guid.Parse(model.IdSpace) });
-                if (!(bool)checkspace.Data) return new ObjectResult(checkspace.Data) { StatusCode = checkspace.StatusCode };
+             
             }
 
             if (model.IdImage != null)
             {
                 var checkimage = await _mediator.Send(new ImageExistsCommand() { Id = Guid.Parse(model.IdImage) });
 
-                if (!(bool)checkimage.Data) return new ObjectResult(checkimage.Data) { StatusCode = checkimage.StatusCode };
             }
+
 
 
             var result = await _mediator.Send(new UpdateEventCommand() { Id = Guid.Parse(id), Start = model.Start, End = model.End, Title = model.Title, Description = model.Description, IdImage = Guid.Parse(model.IdImage), IdSpace = Guid.Parse(model.IdSpace) });
 
-            return new ObjectResult(result.Data) { StatusCode = result.StatusCode };
+            return result;
 
         }
         /// <summary>
@@ -107,12 +117,12 @@ namespace EventService.EntityActivities.EventActiv
         /// <param name="id">string id of Event</param>
 
         [HttpDelete("{id}")]
-        [ProducesResponseType(typeof(bool), 200)]
+        [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
-        public async Task<ObjectResult> DELETE(string id)
+        public async Task<ScResult<string>> Delete(string id)
         {
             var result = await _mediator.Send(new RemoveEventCommand() { Id = Guid.Parse(id) });
-            return new ObjectResult(result.Data) { StatusCode = result.StatusCode };
+            return result;
         }
 
         /// <summary>
@@ -120,12 +130,39 @@ namespace EventService.EntityActivities.EventActiv
         /// </summary>
 
         [HttpGet]
-        [ProducesResponseType(typeof(List<Event>), 200)]
+        [ProducesResponseType(typeof(List<EventViewModel>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
-        public async Task<ObjectResult> GETALLFORTHEWEEK()
+        public async Task<ScResult<List<EventViewModel>>> GetAllOfTheWeek()
         {
             var result = await _mediator.Send(new GetAllEventsForTheWeekCommand());
-            return new ObjectResult(result.Data) { StatusCode = result.StatusCode };
+            return result;
+        }
+
+        [HttpPut("tickets/{id}")]
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 400)]
+        public async Task<ScResult<string>> Put(string id, int count)
+        {
+            var result = await _mediator.Send(new SetTicketsCommand(){Count = count, IdEvent = Guid.Parse(id) });
+            return result;
+        }
+
+        [HttpGet("tickets/{idevent}/haveaticket")]
+        [ProducesResponseType(typeof(ScResult<bool>), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 400)]
+        public async Task<ScResult<bool>> HaveATicket(string idevent, string idowner)
+        {
+            var result = await _mediator.Send(new HaveATicketCommand(){IdEvent = Guid.Parse(idevent), IdOwner = Guid.Parse(idowner) });
+            return result ;
+        }
+
+        [HttpPut("tickets/{idevent}")]
+        [ProducesResponseType(typeof(ScResult<Ticket>), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 400)]
+        public async Task<ScResult<Ticket>> Get(string idevent, string idowner, int place)
+        {
+            var result = await _mediator.Send(new IssueATicketCommand(){IdEvent = Guid.Parse(idevent), IdOwner = Guid.Parse(idowner), Place = place});
+            return result;
         }
 
     }

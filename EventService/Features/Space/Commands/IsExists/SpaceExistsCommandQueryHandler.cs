@@ -1,21 +1,22 @@
-﻿using EventService.Helpers;
+﻿
 using EventService.Models.Interfaces;
 using MediatR;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using SC.Internship.Common.Exceptions;
+using SC.Internship.Common.ScResult;
 
-namespace EventService.EntityActivities.SpaceActiv.Commands.IsExists
+namespace EventService.Features.Space.Commands.IsExists
 {
-    public class SpaceExistsCommandQueryHandler : IRequestHandler<SpaceExistsCommand, ReturnResult>
+    public class SpaceExistsCommandQueryHandler : IRequestHandler<SpaceExistsCommand, ScResult<bool>>
     {
-        private IBaseSpaceService _baseSpaceService;
+        private readonly IBaseSpaceService _baseSpaceService;
 
         public SpaceExistsCommandQueryHandler(IBaseSpaceService baseSpaceService) { _baseSpaceService=baseSpaceService; }
-        public Task<ReturnResult> Handle(SpaceExistsCommand request, CancellationToken cancellationToken)
+        public Task<ScResult<bool>> Handle(SpaceExistsCommand request, CancellationToken cancellationToken)
         {
-            ReturnResult returnResult = new ReturnResult();
-            var IsExists =  _baseSpaceService.IsSpaceExists(request.Id);
-            returnResult.Data = IsExists;
-            returnResult.StatusCode = IsExists ? (int)StatuseCode.Success : (int)StatuseCode.BadRequest;
+            ScResult<bool> returnResult = new ScResult<bool>();
+            var isExists = _baseSpaceService.IsSpaceExists(request.Id);
+              if (!isExists) throw new ScException("Изображение не существует");
+            returnResult.Result = isExists;
             return Task.FromResult(returnResult);
         }
     }

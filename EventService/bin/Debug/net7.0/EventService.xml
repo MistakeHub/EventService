@@ -4,12 +4,17 @@
         <name>EventService</name>
     </assembly>
     <members>
-        <member name="M:EventService.EntityActivities.EventActiv.EventController.GETALL">
+        <member name="T:EventService.Features.Event.Commands.Create.CreateEventCommandRequestHandler">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EventService.Features.Event.EventController.GETALL">
             <summary>
             Method returns Collection and status code
             </summary>
         </member>
-        <member name="M:EventService.EntityActivities.EventActiv.EventController.POST(EventService.Features.Event.RequestCreateEventModel)">
+        <member name="M:EventService.Features.Event.EventController.Post(EventService.Features.Event.RequestCreateEventModel)">
             <summary>
             Method Creates an Event and returns bool value and status code
             </summary>
@@ -17,7 +22,7 @@
             <response code="400">Invalid values</response>
             <param name="model">Test value for idImage and idSpace:7febf16f-651b-43b0-a5e3-0da8da49e90d </param>
         </member>
-        <member name="M:EventService.EntityActivities.EventActiv.EventController.PUT(System.String,EventService.Features.Event.UpdateEventModel)">
+        <member name="M:EventService.Features.Event.EventController.Put(System.String,EventService.Features.Event.UpdateEventModel)">
             <summary>
             Medthod Updates specific Event by id and returns bool value and status code
             </summary>
@@ -26,7 +31,7 @@
             <param name="id">string id of Event</param>
             <param name="model">Test value for idImage and idSpace:7febf16f-651b-43b0-a5e3-0da8da49e90d </param>
         </member>
-        <member name="M:EventService.EntityActivities.EventActiv.EventController.DELETE(System.String)">
+        <member name="M:EventService.Features.Event.EventController.Delete(System.String)">
             <summary>
             Method Removes particular Event by id and returns bool value and status code
             </summary>
@@ -34,14 +39,9 @@
             <response code="400">Invalid values</response>
             <param name="id">string id of Event</param>
         </member>
-        <member name="M:EventService.EntityActivities.EventActiv.EventController.GETALLFORTHEWEEK">
+        <member name="M:EventService.Features.Event.EventController.GetAllOfTheWeek">
             <summary>
             Returns All Event for the current week and status code
-            </summary>
-        </member>
-        <member name="M:EventService.EntityActivities.SpaceActiv.SpaceController.GET(System.String)">
-            <summary>
-            Method returns Collection and status code
             </summary>
         </member>
     </members>

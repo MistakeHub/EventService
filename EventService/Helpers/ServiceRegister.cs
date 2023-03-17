@@ -3,14 +3,45 @@ using EventService.Models.Interfaces;
 using FluentValidation.AspNetCore;
 using FluentValidation;
 using System.Reflection;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Microsoft.IdentityModel.Tokens;
 
 namespace EventService.Helpers
 {
     public static class ServiceRegister
     {
-        public static void AddServices(this IServiceCollection services)
+        public static void AddServices(this IServiceCollection services, IConfiguration appconfig)
         {
+            var asdads = appconfig["Audience"];
+
+
             services.AddControllers().AddFluentValidation(options => { options.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()); });
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.RequireHttpsMetadata = false;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                       
+                        ValidateIssuer = true,
+                        
+                        ValidIssuer = appconfig["Issuer"],
+
+                     
+                        ValidateAudience = true,
+                        
+                        ValidAudience = appconfig["Audience"],
+                       
+                        ValidateLifetime = true,
+
+                       
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(appconfig["Key"])),
+                      
+                        ValidateIssuerSigningKey = true,
+                    };
+                });
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddMediatR((opt) => { opt.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()); });
             services.AddAutoMapper(typeof(Program));

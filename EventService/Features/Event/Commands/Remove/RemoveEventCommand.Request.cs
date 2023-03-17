@@ -1,9 +1,10 @@
-﻿using EventService.Helpers;
+﻿
 using MediatR;
+using SC.Internship.Common.ScResult;
 
-namespace EventService.EntityActivities.EventActiv.Commands.Remove
+namespace EventService.Features.Event.Commands.Remove
 {
-    public class RemoveEventCommand:IRequest<ReturnResult>
+    public class RemoveEventCommand:IRequest<ScResult<string>>
     {
         public Guid Id { get; set; }
     }

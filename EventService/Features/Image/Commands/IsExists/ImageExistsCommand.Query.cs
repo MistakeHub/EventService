@@ -1,9 +1,10 @@
-﻿using EventService.Helpers;
+﻿
 using MediatR;
+using SC.Internship.Common.ScResult;
 
-namespace EventService.EntityActivities.ImageActiv.Commands.IsExists
+namespace EventService.Features.Image.Commands.IsExists
 {
-    public class ImageExistsCommand:IRequest<ReturnResult>
+    public class ImageExistsCommand:IRequest<ScResult<bool>>
     {
         public Guid Id { get; set; }
     }

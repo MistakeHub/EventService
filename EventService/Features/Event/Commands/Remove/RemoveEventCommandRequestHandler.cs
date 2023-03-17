@@ -1,32 +1,31 @@
-﻿using EventService.Helpers;
+﻿
 using EventService.Models.Interfaces;
+using FluentValidation;
 using MediatR;
-using System.ComponentModel.DataAnnotations;
+using SC.Internship.Common.Exceptions;
+using SC.Internship.Common.ScResult;
 
-namespace EventService.EntityActivities.EventActiv.Commands.Remove
+namespace EventService.Features.Event.Commands.Remove
 {
-    public class RemoveEventCommandRequestHandler : IRequestHandler<RemoveEventCommand, ReturnResult>
+    // ReSharper disable once UnusedMember.Global Решарпер рекомендует удалить, так как он не используется
+    public class RemoveEventCommandRequestHandler : IRequestHandler<RemoveEventCommand, ScResult<string>>
     {
-        private IBaseEventService _baseEventService;
+        private readonly IBaseEventService _baseEventService;
 
         public RemoveEventCommandRequestHandler(IBaseEventService baseEventService) { _baseEventService= baseEventService; }
-        public async Task<ReturnResult> Handle(RemoveEventCommand request, CancellationToken cancellationToken)
+        public Task<ScResult<string>> Handle(RemoveEventCommand request, CancellationToken cancellationToken)
         {
-            ReturnResult returnresult = new ReturnResult();
-
+            ScResult<string> returnresult = new ScResult<string>();
+            RemoveEventCommandValidation validation = new RemoveEventCommandValidation();
+            var errors = validation.Validate(request).Errors;
+            if (errors != null) throw new ScException(new ValidationException(errors),"Мероприятие не было удалено");
             var resuldelete = _baseEventService.DeleteEvent(request.Id);
-            RemoveEventCommandValidation validator= new RemoveEventCommandValidation();
-            var error = validator.Validate(request).Errors.FirstOrDefault();
-            if (error != null)
-            {
 
-                returnresult.Data = error.ErrorMessage;
-                returnresult.StatusCode = (int)StatuseCode.BadRequest;
-                return returnresult;
-            }
-            returnresult.Data = resuldelete ? "Мероприятие было удалено" : "Мероприятие не было удалено";
-            returnresult.StatusCode = resuldelete ? (int)StatuseCode.Success : (int)StatuseCode.Unprocessable;
-            return returnresult;
+         
+            if (!resuldelete) throw new ScException("Мероприятие не было удалено");
+            returnresult.Result= "Мероприятие было удалено";
+
+            return Task.FromResult(returnresult);
         }
     }
 }

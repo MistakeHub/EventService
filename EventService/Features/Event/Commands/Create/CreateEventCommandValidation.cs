@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace EventService.EntityActivities.EventActiv.Commands.Create
+namespace EventService.Features.Event.Commands.Create
 {
     public class CreateEventCommandValidation:AbstractValidator<CreateEventCommand>
     {

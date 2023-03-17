@@ -1,9 +1,11 @@
-﻿using EventService.Helpers;
+﻿
+using EventService.Models.ViewModels;
 using MediatR;
+using SC.Internship.Common.ScResult;
 
-namespace EventService.EntityActivities.EventActiv.Commands.GetAllForTheWeek
+namespace EventService.Features.Event.Commands.GetAllForTheWeek
 {
-    public class GetAllEventsForTheWeekCommand:IRequest<ReturnResult>
+    public class GetAllEventsForTheWeekCommand:IRequest<ScResult<List<EventViewModel>>>
     {
     }
 }

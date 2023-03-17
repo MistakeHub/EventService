@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace EventService.EntityActivities.EventActiv.Commands.Update
+namespace EventService.Features.Event.Commands.Update
 {
     public class UpdateEventCommandValidation:AbstractValidator<UpdateEventCommand>
     {
