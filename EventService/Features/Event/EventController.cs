@@ -31,29 +31,30 @@ namespace EventService.Features.Event
 
         public EventController(IMediator mediator) { _mediator = mediator; }
         /// <summary>
-        /// Method returns Collection and status code
+        /// Метод возращающий коллекцию мероприятий
         /// </summary>
         [ProducesResponseType(typeof(List<Models.Entities.Event>), 200)]
         [ProducesResponseType(typeof(JsonResult), 400)]
 
         [HttpGet]
-        public async Task<ScResult<List<EventViewModel>>> GETALL()
+        public async Task<ScResult<List<EventViewModel>>> GetAll()
         {
             var result = await _mediator.Send(new GetAllEventsCommand());
             return result;
         }
 
         /// <summary>
-        /// Method Creates an Event and returns bool value and status code
+        /// Метод создающий мероприятие
         /// </summary>
-        /// <response code="200">Event has been created</response>
-        /// <response code="400">Invalid values</response>
-        /// <param name="model">Test value for idImage and idSpace:7febf16f-651b-43b0-a5e3-0da8da49e90d </param>
+        /// <response code="200">Событие создано</response>
+        /// <response code="400">Событие не было создано</response>
+        /// <param name="model">Тестовое значение для idImage и idSpace:7febf16f-651b-43b0-a5e3-0da8da49e90d </param>
         
 
         // POST api/<EventController>
         [HttpPost]
         [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 400)]
         public async Task<ScResult<string>> Post([FromBody] RequestCreateEventModel model)
         {
             var checkspace = await _mediator.Send(new SpaceExistsCommand() { Id = Guid.Parse(model.IdSpace) });
@@ -77,17 +78,17 @@ namespace EventService.Features.Event
 
         }
         /// <summary>
-        /// Medthod Updates specific Event by id and returns bool value and status code
+        /// Метод Обновляет информацию об определённом событие
         /// </summary>
 
-        /// <response code="200">Event has been updated</response>
-        /// <response code="400">Invalid values</response>
-        /// <param name="id">string id of Event</param>
-        /// <param name="model">Test value for idImage and idSpace:7febf16f-651b-43b0-a5e3-0da8da49e90d </param>
-        [HttpPut("{id}")]
+        /// <response code="200">Событие было обновлено</response>
+        /// <response code="400">Событие не было обновлено</response>
+        /// <param name="idevent">id события</param>
+        /// <param name="model">Тестовое значение для idImage и idSpace:7febf16f-651b-43b0-a5e3-0da8da49e90d </param>
+        [HttpPut("{idevent}")]
          [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
-        public async Task<ScResult<string>> Put(string id,[FromBody] UpdateEventModel model)
+        public async Task<ScResult<string>> Put(string idevent, [FromBody] UpdateEventModel model)
         {
           
             if (model.IdSpace != null)
@@ -104,19 +105,19 @@ namespace EventService.Features.Event
 
 
 
-            var result = await _mediator.Send(new UpdateEventCommand() { Id = Guid.Parse(id), Start = model.Start, End = model.End, Title = model.Title, Description = model.Description, IdImage = Guid.Parse(model.IdImage), IdSpace = Guid.Parse(model.IdSpace) });
+            var result = await _mediator.Send(new UpdateEventCommand() { Id = Guid.Parse(idevent), Start = model.Start, End = model.End, Title = model.Title, Description = model.Description, IdImage = Guid.Parse(model.IdImage), IdSpace = Guid.Parse(model.IdSpace) });
 
             return result;
 
         }
         /// <summary>
-        /// Method Removes particular Event by id and returns bool value and status code
+        /// Метод удаляет определённое событие
         /// </summary>
-        /// <response code="200">Event has been removed by specific id</response>
-        /// <response code="400">Invalid values</response>
-        /// <param name="id">string id of Event</param>
+        /// <response code="200">Событие удалено</response>
+        /// <response code="400">Событие не было удалено</response>
+        /// <param name="ideven">id события</param>
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{idevent}")]
         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
         public async Task<ScResult<string>> Delete(string id)
@@ -126,7 +127,7 @@ namespace EventService.Features.Event
         }
 
         /// <summary>
-        /// Returns All Event for the current week and status code
+        /// Метод возвращающий все события, запланированные на неделю
         /// </summary>
 
         [HttpGet]
@@ -137,25 +138,42 @@ namespace EventService.Features.Event
             var result = await _mediator.Send(new GetAllEventsForTheWeekCommand());
             return result;
         }
-
-        [HttpPut("tickets/{id}")]
+        /// <summary>
+        /// Метод создаёт билеты на определённое мероприятие определённого количества
+        /// </summary>
+        /// <response code="200">Билеты были успешно созданы</response>
+        /// <response code="400">Билеты не были созданы</response>
+        /// <param name="idevent">Id мероприятия</param>
+        /// <param name="count">количество билетов</param>
+        [HttpPut("tickets/settickets/{idevent}")]
         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
-        public async Task<ScResult<string>> Put(string id, int count)
+        public async Task<ScResult<string>> Put(string idevent, int count)
         {
-            var result = await _mediator.Send(new SetTicketsCommand(){Count = count, IdEvent = Guid.Parse(id) });
+            var result = await _mediator.Send(new SetTicketsCommand(){Count = count, IdEvent = Guid.Parse(idevent) });
             return result;
         }
-
+        /// <summary>
+        /// Проверяет у определённого пользователя наличие билета на определённое мероприятие
+        /// </summary>
+        /// <param name="idevent">Id мероприятия</param>
+        /// /// <param name="idowner">Id предпологаемого владельца</param>
         [HttpGet("tickets/{idevent}/haveaticket")]
         [ProducesResponseType(typeof(ScResult<bool>), 200)]
-        [ProducesResponseType(typeof(BadRequestResult), 400)]
+   
         public async Task<ScResult<bool>> HaveATicket(string idevent, string idowner)
         {
             var result = await _mediator.Send(new HaveATicketCommand(){IdEvent = Guid.Parse(idevent), IdOwner = Guid.Parse(idowner) });
             return result ;
         }
-
+        /// <summary>
+        /// Выдаёт билеты на определённое мероприятие определённому пользователю
+        /// </summary>
+        /// <response code="200">Билеты были успешно созданы</response>
+        /// <response code="400">Билеты не были созданы</response>
+        /// <param name="idevent">Id мероприятия</param>
+        /// <param name="idowner">Id мероприятия</param>
+        /// <param name="place">место</param>
         [HttpPut("tickets/{idevent}")]
         [ProducesResponseType(typeof(ScResult<Ticket>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
