@@ -21,9 +21,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
 
-app.UseAuthorization();
+
+
 
 app.MapGet("/token", (string username, string password) =>
 {

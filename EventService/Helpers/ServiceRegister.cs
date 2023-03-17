@@ -21,25 +21,17 @@ namespace EventService.Helpers
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
+                  
                     options.RequireHttpsMetadata = false;
+                    options.Authority = "http://127.0.0.1:5000";
+
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
-                       
-                        ValidateIssuer = true,
-                        
-                        ValidIssuer = appconfig["Issuer"],
-
-                     
                         ValidateAudience = true,
-                        
-                        ValidAudience = appconfig["Audience"],
-                       
                         ValidateLifetime = true,
-
-                       
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(appconfig["Key"])),
-                      
-                        ValidateIssuerSigningKey = true,
+                        ValidateIssuer = true,
+                        ValidateIssuerSigningKey = false,
+                        ValidateActor = false,
                     };
                 });
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());

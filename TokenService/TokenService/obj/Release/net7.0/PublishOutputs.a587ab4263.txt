@@ -1,0 +1,17 @@
+C:\Users\Shawn\OpporRepositories\EventService\TokenService\TokenService\obj\Docker\publish\TokenService.exe
+C:\Users\Shawn\OpporRepositories\EventService\TokenService\TokenService\obj\Docker\publish\appsettings.Development.json
+C:\Users\Shawn\OpporRepositories\EventService\TokenService\TokenService\obj\Docker\publish\appsettings.json
+C:\Users\Shawn\OpporRepositories\EventService\TokenService\TokenService\obj\Docker\publish\TokenService.dll
+C:\Users\Shawn\OpporRepositories\EventService\TokenService\TokenService\obj\Docker\publish\TokenService.deps.json
+C:\Users\Shawn\OpporRepositories\EventService\TokenService\TokenService\obj\Docker\publish\TokenService.runtimeconfig.json
+C:\Users\Shawn\OpporRepositories\EventService\TokenService\TokenService\obj\Docker\publish\TokenService.pdb
+C:\Users\Shawn\OpporRepositories\EventService\TokenService\TokenService\obj\Docker\publish\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\Shawn\OpporRepositories\EventService\TokenService\TokenService\obj\Docker\publish\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Shawn\OpporRepositories\EventService\TokenService\TokenService\obj\Docker\publish\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Shawn\OpporRepositories\EventService\TokenService\TokenService\obj\Docker\publish\Microsoft.IdentityModel.Logging.dll
+C:\Users\Shawn\OpporRepositories\EventService\TokenService\TokenService\obj\Docker\publish\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Shawn\OpporRepositories\EventService\TokenService\TokenService\obj\Docker\publish\Microsoft.OpenApi.dll
+C:\Users\Shawn\OpporRepositories\EventService\TokenService\TokenService\obj\Docker\publish\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Shawn\OpporRepositories\EventService\TokenService\TokenService\obj\Docker\publish\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Shawn\OpporRepositories\EventService\TokenService\TokenService\obj\Docker\publish\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Shawn\OpporRepositories\EventService\TokenService\TokenService\obj\Docker\publish\System.IdentityModel.Tokens.Jwt.dll

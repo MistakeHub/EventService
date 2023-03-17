@@ -1,0 +1,8 @@
+version: '3.4'
+services:
+  backend:
+    image: tockenservice
+    container_name: tokenserviceprovider
+    ports:
+    - 5000:8081
+    restart: always

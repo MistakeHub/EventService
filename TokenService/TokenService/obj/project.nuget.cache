@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "b40Jo7GvnVDUH2PKqxZMz/5sv8tp4YvTjumQtYRJthfKECK+zuntgrZAmBTsc2jKk3afWDgDhZDLuxMbGY+Ciw==",
+  "dgSpecHash": "IhCYVrI0sroQGdsBXA8cXQ6rD4msA56Tb+JtV/iwKoZysMEgaRKYSd4UAAuBZoxKSxGqFHwQOA6yXLNkxOo+SQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Shawn\\OpporRepositories\\EventService\\TokenService\\TokenService\\TokenService.csproj",
   "expectedPackageFiles": [
@@ -14,6 +14,7 @@
     "C:\\Users\\Shawn\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\Shawn\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\Shawn\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
+    "C:\\Users\\Shawn\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.17.0\\microsoft.visualstudio.azure.containers.tools.targets.1.17.0.nupkg.sha512",
     "C:\\Users\\Shawn\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
     "C:\\Users\\Shawn\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
     "C:\\Users\\Shawn\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
