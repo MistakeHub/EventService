@@ -4,7 +4,7 @@ services:
     image: eventservice
     container_name: Eventservice
     depends_on:                     
-    - mongodb        
+    - mongodb 
     ports:
     - 8081:80
   mongodb:
@@ -13,4 +13,9 @@ services:
     - MONGO_INITDB_ROOT_USERNAME=root            
     - MONGO_INITDB_ROOT_PASSWORD=foobar        
     ports:
-    - 27018:27018              
+    - 27018:27018
+networks:
+    default:
+     external: true
+     name: eventidentity_net     
+ 

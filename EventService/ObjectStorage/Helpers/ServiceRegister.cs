@@ -32,14 +32,14 @@ public static class ServiceRegister
 #pragma warning disable CS0618
         services.AddControllers().AddFluentValidation(options => { options.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()); });
 #pragma warning restore CS0618
-        services.AddSingleton(new MongoClient("mongodb://127.0.0.1:27018"));
+        services.AddSingleton(new MongoClient("mongodb://root:foobar@MongoDb"));
         BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
 #pragma warning disable CS0618
         BsonDefaults.GuidRepresentation = GuidRepresentation.Standard;
 #pragma warning restore CS0618
         services.AddIdentityServer(options =>
             {
-                options.IssuerUri = "http://127.0.0.1:5000";
+                options.IssuerUri = "http://identity";
             })
             .AddDeveloperSigningCredential() // use a valid signing cert in production
             .AddInMemoryIdentityResources(Config.GetIdentityResources())
@@ -49,14 +49,14 @@ public static class ServiceRegister
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme,
             options =>
             {
-                options.Authority = "http://localhost:5000";
+                options.Authority = "http://identity";
                 // ReSharper disable once StringLiteralTypo решарпер хочет myApi
                 options.Audience = "myapi";
                 options.RequireHttpsMetadata = false;
                 options.ForwardDefaultSelector = Selector.ForwardReferenceToken();
             }).AddOAuth2Introspection("introspection", options =>
         {
-            options.Authority = "http://localhost:5000";
+            options.Authority = "http://identity";
             // ReSharper disable once StringLiteralTypo решарпер хочет hardToGuess
             // ReSharper disable once StringLiteralTypo решарпер хочет myApi
             options.ClientSecret = "hardtoguess"; options.ClientId = "myapi";
