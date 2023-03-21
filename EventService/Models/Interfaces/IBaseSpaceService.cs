@@ -1,10 +1,16 @@
-﻿using EventService.Models.Entities;
+﻿
 
-namespace EventService.Models.Interfaces
+namespace EventService.Models.Interfaces;
+
+/// <summary>
+/// Интерфейс для сервисов пространств
+/// </summary>
+public interface IBaseSpaceService
 {
-    public interface IBaseSpaceService
-    {
-        public Space Get(Guid id);
-        public bool IsSpaceExists(Guid idspace);
-    }
+    /// <summary>
+    /// проверка наличия пространства
+    /// </summary>
+    /// <param name="idspace">пространство</param>
+    /// <returns>результат проверки</returns>
+    public bool IsSpaceExists(Guid idspace);
 }

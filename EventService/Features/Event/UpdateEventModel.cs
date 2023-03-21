@@ -1,19 +1,39 @@
-﻿namespace EventService.Features.Event
+﻿namespace EventService.Features.Event;
+
+/// <summary>
+/// Модель для обновления мероприятий
+/// </summary>
+public class UpdateEventModel
 {
-    public class UpdateEventModel
-    {
 
 
-        public DateTime Start { get; set; }
+    /// <summary>
+    /// Дата начала мероприятия
+    /// </summary>
+    public DateTime Start { get; set; }
 
-        public DateTime End { get; set; }
+    /// <summary>
+    /// Дата окончания мероприятия
+    /// </summary>
+    public DateTime End { get; set; }
 
-        public string? Title { get; set; }
+    /// <summary>
+    /// Название мероприятия
+    /// </summary>
+    public string? Title { get; set; }
 
-        public string? Description { get; set; }
+    /// <summary>
+    /// Описание мероприятия
+    /// </summary>
+    public string? Description { get; set; }
 
-        public string? IdImage { get; set; }
+    /// <summary>
+    /// Id изображения мероприятия
+    /// </summary>
+    public string? IdImage { get; set; }
 
-        public string? IdSpace { get; set; }
-    }
+    /// <summary>
+    /// Id пространства мероприятия
+    /// </summary>
+    public string? IdSpace { get; set; }
 }

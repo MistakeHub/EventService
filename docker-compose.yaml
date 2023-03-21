@@ -1,0 +1,16 @@
+version: '3.4'
+services:
+  backend:
+    image: eventservice
+    container_name: Eventservice
+    depends_on:                     
+    - mongodb        
+    ports:
+    - 8081:80
+  mongodb:
+    image: mongo
+    environment:            
+    - MONGO_INITDB_ROOT_USERNAME=root            
+    - MONGO_INITDB_ROOT_PASSWORD=foobar        
+    ports:
+    - 27018:27018              

@@ -1,9 +1,13 @@
-﻿namespace EventService.Models.Entities
-{
-    public class Image
-    {
-        public Guid Id { get; set; }=Guid.NewGuid();
+﻿namespace EventService.Models.Entities;
 
-        public string FilePath { get; set; }
-    }
+/// <summary>
+/// Класс изображения
+/// </summary>
+public class Image
+{
+    /// <summary>
+    /// Id изображения
+    /// </summary>
+    public Guid Id { get; set; }=Guid.NewGuid();
+
 }

@@ -1,11 +1,18 @@
-﻿using EventService.Models.Entities;
+﻿
 
-namespace EventService.Models.Interfaces
+namespace EventService.Models.Interfaces;
+
+/// <summary>
+/// Интерфейс для сервисов изображений
+/// </summary>
+public interface IBaseImageService
 {
-    public interface IBaseImageService
-    {
-        public Image Get(Guid id);
-        public bool IsImageExists(Guid idimage);
 
-    }
+    /// <summary>
+    /// наличие изображения
+    /// </summary>
+    /// <param name="idimage">изображение</param>
+    /// <returns>результат проверки</returns>
+    public bool IsImageExists(Guid idimage);
+
 }

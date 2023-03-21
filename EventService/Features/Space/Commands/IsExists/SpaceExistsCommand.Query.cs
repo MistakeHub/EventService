@@ -2,10 +2,15 @@
 using MediatR;
 using SC.Internship.Common.ScResult;
 
-namespace EventService.Features.Space.Commands.IsExists
+namespace EventService.Features.Space.Commands.IsExists;
+
+/// <summary>
+///  Команда проверки наличия пространства
+/// </summary>
+public class SpaceExistsCommand:IRequest<ScResult<bool>>
 {
-    public class SpaceExistsCommand:IRequest<ScResult<bool>>
-    {
-        public Guid Id { get; set; }
-    }
+    /// <summary>
+    /// Id пространства
+    /// </summary>
+    public Guid Id { get; set; }
 }

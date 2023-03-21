@@ -1,27 +1,70 @@
-﻿namespace EventService.Models.Entities
+﻿
+
+using MongoDB.Bson.Serialization.Attributes;
+
+namespace EventService.Models.Entities;
+
+/// <summary>
+/// Класс Мероприятия
+/// </summary>
+public class Event
 {
-    public class Event
+
+    /// <summary>
+    /// Id мероприятия
+    /// </summary>
+    [BsonId]
+    public Guid Id { get; set; } = Guid.NewGuid();
+
+    /// <summary>
+    /// Дата начала мероприятия
+    /// </summary>
+    public DateTime? Start { get; set; }
+
+    /// <summary>
+    /// Дата окончания мероприятия
+    /// </summary>
+    public DateTime? End { get; set; }
+
+    /// <summary>
+    /// Название мероприятия
+    /// </summary>
+    public string? Title { get; set; }
+
+    /// <summary>
+    /// Описание мероприятия
+    /// </summary>
+    public string? Description { get; set; }
+
+    /// <summary>
+    /// Id изображения мероприятия
+    /// </summary>
+    public Guid? IdImage { get; set; }
+
+    /// <summary>
+    /// Id пространства мероприятия
+    /// </summary>
+    public Guid? IdSpace { get; set; }
+
+    /// <summary>
+    /// Билеты на мероприятие
+    /// </summary>
+    public List<Ticket> Tickets { get; set; }=new();
+
+    // ReSharper disable once UnusedMember.Global  
+    /// <summary>
+    /// Флаг наличия мест у билетов
+    /// </summary>
+    public bool HaveTicketsSeats
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
+        get { return Tickets.Any(v=>v.Seat !=null); }
+    }
 
-        public DateTime? Start { get; set; }
-
-        public DateTime? End { get; set; }  
-        
-        public string? Title { get; set; }
-
-        public string? Description { get; set; }
-
-        public Guid? IdImage { get; set; }
-
-        public Guid? IdSpace { get; set; }
-
-        public List<Ticket> Tickets { get; set; }=new List<Ticket>();
-
-        // ReSharper disable once UnusedMember.Global 
-        public bool IsAvailableTickets
-        {
-            get { return Tickets.Select(v=>v.IdOwner!=null).Count() != 0; }
-        }
+    /// <summary>
+    /// Проверка наличия свободных билетов
+    /// </summary>
+    public bool IsTicketsAvailable
+    {
+        get { return Tickets.Any(v => v.IdOwner == null); }
     }
 }

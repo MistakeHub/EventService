@@ -1,7 +1,17 @@
-﻿namespace EventService.Models.Entities
+﻿namespace EventService.Models.Entities;
+
+/// <summary>
+/// Пользователь
+/// </summary>
+public class User
 {
-    public class User
-    {
-        public Guid Id { get; set; } = Guid.NewGuid();
-    }
+    /// <summary>
+    /// Id пользователя
+    /// </summary>
+    public Guid Id { get; set; } = Guid.NewGuid();
+
+    /// <summary>
+    /// Ник пользователя
+    /// </summary>
+    public string? Nickname { get; set; }
 }

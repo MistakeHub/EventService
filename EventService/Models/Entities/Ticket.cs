@@ -1,12 +1,23 @@
-﻿namespace EventService.Models.Entities
+﻿namespace EventService.Models.Entities;
+
+/// <summary>
+/// Билет
+/// </summary>
+public class Ticket
 {
-    public class Ticket
-    {
-        public Guid Id { get; set; } = Guid.NewGuid();
+    /// <summary>
+    /// Id билета
+    /// </summary>
+    public Guid Id { get; set; } = Guid.NewGuid();
 
-        public Guid? IdOwner { get; set; }
+    /// <summary>
+    /// Id владельца
+    /// </summary>
+    public Guid? IdOwner { get; set; }
 
-        public int Place { get; set; }
+    /// <summary>
+    /// Место
+    /// </summary>
+    public int? Seat { get; set; }
 
-    }
 }

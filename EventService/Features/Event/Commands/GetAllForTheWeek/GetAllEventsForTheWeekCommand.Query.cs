@@ -1,11 +1,12 @@
-﻿
-using EventService.Models.ViewModels;
+﻿using EventService.ObjectStorage.ViewModels;
 using MediatR;
 using SC.Internship.Common.ScResult;
 
-namespace EventService.Features.Event.Commands.GetAllForTheWeek
+namespace EventService.Features.Event.Commands.GetAllForTheWeek;
+
+/// <summary>
+/// Команда получения всех мероприятий на неделю
+/// </summary>
+public class GetAllEventsForTheWeekCommand:IRequest<ScResult<List<EventViewModel>>>
 {
-    public class GetAllEventsForTheWeekCommand:IRequest<ScResult<List<EventViewModel>>>
-    {
-    }
 }

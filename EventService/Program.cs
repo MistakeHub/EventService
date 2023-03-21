@@ -1,12 +1,11 @@
-using EventService.Helpers;
-
+using EventService.ObjectStorage.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.что это
-var services=builder.Services;
+var services = builder.Services;
 services.AddCors();
-services.AddServices(builder.Configuration);
+services.AddServices();
 
 var app = builder.Build();
 
@@ -18,15 +17,16 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors(x => x
-    .AllowAnyMethod()
-    .AllowAnyHeader()
-    .SetIsOriginAllowed(origin => true) // allow any origin
-    .AllowCredentials());
+
 
 
 
 app.MapControllers();
+
+
+app.UseIdentityServer();
 app.UseAuthentication();
 app.UseAuthorization();
+
+
 app.Run();

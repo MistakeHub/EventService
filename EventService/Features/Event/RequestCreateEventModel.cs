@@ -1,12 +1,37 @@
-﻿namespace EventService.Features.Event
+﻿namespace EventService.Features.Event;
+
+/// <summary>
+/// Модель данных для создания мероприятий
+/// </summary>
+public class RequestCreateEventModel
 {
-    public class RequestCreateEventModel
-    {
-        public DateTime Start { get; set; }
-        public DateTime End { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public string IdImage { get; set; }
-        public string IdSpace { get; set; }
-    }
+    /// <summary>
+    /// Дата начала мероприятия
+    /// </summary>
+    public DateTime Start { get; set; }
+
+    /// <summary>
+    /// Дата окончания мероприятия
+    /// </summary>
+    public DateTime End { get; set; }
+
+    /// <summary>
+    /// Название мероприятия
+    /// </summary>
+    public string Title { get; set; } = null!;
+
+    /// <summary>
+    /// Описание мероприятия
+    /// </summary>
+    public string Description { get; set; } = null!;
+
+    /// <summary>
+    /// Id изображения мероприятия
+    /// </summary>
+    public string IdImage { get; set; } = null!;
+
+    /// <summary>
+    /// Id пространства мероприятия
+    /// </summary>
+    public string IdSpace { get; set; } = null!;
 }
