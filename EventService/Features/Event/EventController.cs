@@ -6,7 +6,9 @@ using EventService.Features.Ticket.Commands.SetFreeTickets;
 using EventService.Features.Event.Commands.Update;
 using EventService.Features.Filters;
 using EventService.Features.Image.Commands.IsExists;
+using EventService.Features.Image.Commands.Remove;
 using EventService.Features.Space.Commands.IsExists;
+using EventService.Features.Space.Commands.Remove;
 using EventService.Features.Ticket.Commands.CheckSeat;
 
 using EventService.Features.Ticket.Commands.IssueATicket;
@@ -94,11 +96,18 @@ public class EventController : ControllerBase
     [ProducesResponseType(typeof(BadRequestResult), 400)]
     public async Task<ScResult<string>> Put(string idevent, [FromBody] UpdateEventModel model)
     {
-          
+      
+
+
         if (Guid.TryParse(model.IdSpace, out var idSpace))
         {
             await _mediator.Send(new SpaceExistsCommand { Id = idSpace});
-             
+           
+        }
+        if(idSpace == Guid.Empty)
+        {
+            await _mediator.Send(new RemoveSpaceEvent { IdEvent = Guid.Parse(idevent) });
+            await _mediator.Send(new RemoveEventCommand { Id = Guid.Parse(idevent) });
         }
             
 
@@ -106,6 +115,10 @@ public class EventController : ControllerBase
         {
             await _mediator.Send(new ImageExistsCommand { Id = idImage });
 
+        }
+        if (idSpace == Guid.Empty)
+        {
+            await _mediator.Send(new RemoveImageEvent { IdEvent = Guid.Parse(idevent) });
         }
 
         var result = await _mediator.Send(new UpdateEventCommand { Id = Guid.Parse(idevent), Start = model.Start, End = model.End, Title = model.Title, Description = model.Description, IdImage = idImage, IdSpace = idSpace});
@@ -174,6 +187,7 @@ public class EventController : ControllerBase
         var result = await _mediator.Send(new HaveATicketCommand{IdEvent = Guid.Parse(idevent), IdOwner = Guid.Parse(idowner) });
         return result ;
     }
+
     /// <summary>
     /// Выдаёт билет на определённое мероприятие определённому пользователю
     /// </summary>
@@ -181,13 +195,15 @@ public class EventController : ControllerBase
     /// <response code="400">Билет не был выдан</response>
     /// <param name="idevent">Id мероприятия</param>
     /// <param name="idowner">Id пользователя</param>
+    /// <param name="price">цена за билет</param>
     [HttpPut("tickets/{idevent}")]
     [ProducesResponseType(typeof(ScResult<Models.Entities.Ticket>), 200)]
     [ProducesResponseType(typeof(BadRequestResult), 400)]
-    public async Task<ScResult<Models.Entities.Ticket>> IssueTicket(string idevent, string idowner)
+    public async Task<ScResult<Models.Entities.Ticket>> IssueTicket(string idevent, string idowner, decimal price)
     {
-        if (Guid.TryParse(idowner, out var userid))await _mediator.Send(new UserExistsCommand { Id = userid });
-        var result = await _mediator.Send(new IssueATicketCommand{IdEvent = Guid.Parse(idevent), IdOwner = userid });
+        if (Guid.TryParse(idowner, out var userid))
+            await _mediator.Send(new UserExistsCommand { Id = userid });
+        var result = await _mediator.Send(new IssueATicketCommand{IdEvent = Guid.Parse(idevent), IdOwner = userid,Price = price, Authorization = HttpContext.Request.Headers.Authorization});
         return result;
     }
 

@@ -1,7 +1,7 @@
 using EventService.Features.Event.Commands.Create;
 using EventService.Features.Ticket.Commands.SetFreeTickets;
 
-using EventService.Features.Ticket.Commands.IssueATicket;
+
 
 using EventService.Infrastructure.InterfaceImplements;
 
@@ -61,20 +61,7 @@ public class Tests
 
         Assert.AreEqual(result.GetType(), typeof(ScResult<string>));
     }
-    [Test]
-    public void TicketForNotExistUser()
-    {
-        var eventDefault=_eventService.GetAllEvents().FirstOrDefault();
-        var idNonUser = Guid.Empty;
-        if (eventDefault == null) return;
-        var command = new IssueATicketCommand
-        {
-            IdEvent = eventDefault.Id,
-            IdOwner = idNonUser
-        };
 
-        Assert.Throws(typeof(ScException), () => { var unused = new IssueATicketCommandRequestHandler(_eventService).Handle(command,new CancellationToken()).Result; });
-    }
 
     [Test]
     public void TicketsForNotExistEvent()

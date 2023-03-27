@@ -21,7 +21,8 @@ public class EventServiceMapper : Profile
             .ForMember(opt => opt.IdImage, des => des.MapFrom(v => v.IdImage))
             .ForMember(opt => opt.IdSpace, des => des.MapFrom(v => v.IdSpace))
             .ForMember(opt => opt.IsTicketsAvailable, des => des.MapFrom(v => v.IsTicketsAvailable))
-            .ForMember(opt => opt.HaveTicketsSeats, des => des.MapFrom(v => v.HaveTicketsSeats));
+            .ForMember(opt => opt.HaveTicketsSeats, des => des.MapFrom(v => v.HaveTicketsSeats)).
+            ForMember(opt => opt.Price, des => des.MapFrom(v => v.Price)); 
 
 
 

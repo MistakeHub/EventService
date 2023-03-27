@@ -119,7 +119,7 @@
             Класс обработчик команды удаления мероприятия
             </summary>
         </member>
-        <member name="M:EventService.Features.Event.Commands.Remove.RemoveEventCommandRequestHandler.#ctor(EventService.Models.Interfaces.IBaseEventService)">
+        <member name="M:EventService.Features.Event.Commands.Remove.RemoveEventCommandRequestHandler.#ctor(EventService.Models.Interfaces.IBaseEventService,EventService.Models.Interfaces.IBaseRabbitMqService)">
             <summary>
             Конструктор
             </summary>
@@ -267,7 +267,7 @@
             <param name="idevent">Id мероприятия</param>
             /// <param name="idowner">Id предпологаемого владельца</param>
         </member>
-        <member name="M:EventService.Features.Event.EventController.IssueTicket(System.String,System.String)">
+        <member name="M:EventService.Features.Event.EventController.IssueTicket(System.String,System.String,System.Decimal)">
             <summary>
             Выдаёт билет на определённое мероприятие определённому пользователю
             </summary>
@@ -275,6 +275,7 @@
             <response code="400">Билет не был выдан</response>
             <param name="idevent">Id мероприятия</param>
             <param name="idowner">Id пользователя</param>
+            <param name="price">цена за билет</param>
         </member>
         <member name="M:EventService.Features.Event.EventController.CheckTicket(System.String,System.String)">
             <summary>
@@ -376,12 +377,17 @@
             Id изображения
             </summary>
         </member>
+        <member name="P:EventService.Features.Image.Commands.IsExists.ImageExistsCommand.Authorization">
+            <summary>
+            поле для метода авторизации
+            </summary>
+        </member>
         <member name="T:EventService.Features.Image.Commands.IsExists.ImageExistsCommandQueryHandler">
             <summary>
             Класс обработчик команды проверки наличия изображения
             </summary>
         </member>
-        <member name="M:EventService.Features.Image.Commands.IsExists.ImageExistsCommandQueryHandler.#ctor(EventService.Models.Interfaces.IBaseImageService)">
+        <member name="M:EventService.Features.Image.Commands.IsExists.ImageExistsCommandQueryHandler.#ctor(EventService.ObjectStorage.HttpService.HttpServiceClient)">
             <summary>
             Конструктор
             </summary>
@@ -390,6 +396,35 @@
             <summary>
             обработчик
             </summary>
+        </member>
+        <member name="T:EventService.Features.Image.Commands.Remove.RemoveImageEvent">
+            <summary>
+            Команда для удаления изображения мероприятия
+            </summary>
+        </member>
+        <member name="P:EventService.Features.Image.Commands.Remove.RemoveImageEvent.IdEvent">
+            <summary>
+            Id мероприятия
+            </summary>
+        </member>
+        <member name="T:EventService.Features.Image.Commands.Remove.RemoveImageEventRequestHandler">
+            <summary>
+            Класс обработчик команды удаления изображения из мероприятия 
+            </summary>
+        </member>
+        <member name="M:EventService.Features.Image.Commands.Remove.RemoveImageEventRequestHandler.#ctor(EventService.Models.Interfaces.IBaseEventService,EventService.Models.Interfaces.IBaseRabbitMqService)">
+            <summary>
+            Конструктор
+            </summary>
+        </member>
+        <member name="M:EventService.Features.Image.Commands.Remove.RemoveImageEventRequestHandler.Handle(EventService.Features.Image.Commands.Remove.RemoveImageEvent,System.Threading.CancellationToken)">
+            <summary>
+            Обработчик
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+            <exception cref="T:SC.Internship.Common.Exceptions.ScException"></exception>
         </member>
         <member name="T:EventService.Features.Space.Commands.IsExists.SpaceExistsCommand">
             <summary>
@@ -401,12 +436,17 @@
             Id пространства
             </summary>
         </member>
+        <member name="P:EventService.Features.Space.Commands.IsExists.SpaceExistsCommand.Authorization">
+            <summary>
+            поле для типа авторизации
+            </summary>
+        </member>
         <member name="T:EventService.Features.Space.Commands.IsExists.SpaceExistsCommandQueryHandler">
             <summary>
             Класс обработчик команды проверки наличия изображения
             </summary>
         </member>
-        <member name="M:EventService.Features.Space.Commands.IsExists.SpaceExistsCommandQueryHandler.#ctor(EventService.Models.Interfaces.IBaseSpaceService)">
+        <member name="M:EventService.Features.Space.Commands.IsExists.SpaceExistsCommandQueryHandler.#ctor(EventService.ObjectStorage.HttpService.HttpServiceClient)">
             <summary>
             Конструктор
             </summary>
@@ -416,15 +456,34 @@
             Обработчик
             </summary>
         </member>
-        <member name="T:EventService.Features.Stub.StubController">
+        <member name="T:EventService.Features.Space.Commands.Remove.RemoveSpaceEvent">
             <summary>
-            Тестовый контроллер для ауентификации
+            Команда для удаления пространства мероприятия
             </summary>
         </member>
-        <member name="M:EventService.Features.Stub.StubController.Post">
+        <member name="P:EventService.Features.Space.Commands.Remove.RemoveSpaceEvent.IdEvent">
             <summary>
-            Тестовый post запрос
+            Id мероприятия 
             </summary>
+        </member>
+        <member name="T:EventService.Features.Space.Commands.Remove.RemoveSpaceEventRequestHandler">
+            <summary>
+            Класс обработчик команды удаления пространства
+            </summary>
+        </member>
+        <member name="M:EventService.Features.Space.Commands.Remove.RemoveSpaceEventRequestHandler.#ctor(EventService.Models.Interfaces.IBaseEventService,EventService.Models.Interfaces.IBaseRabbitMqService)">
+            <summary>
+            Конструктор
+            </summary>
+        </member>
+        <member name="M:EventService.Features.Space.Commands.Remove.RemoveSpaceEventRequestHandler.Handle(EventService.Features.Space.Commands.Remove.RemoveSpaceEvent,System.Threading.CancellationToken)">
+            <summary>
+            Обработчик 
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+            <exception cref="T:SC.Internship.Common.Exceptions.ScException"></exception>
         </member>
         <member name="T:EventService.Features.Ticket.Commands.CheckSeat.CheckSeatCommand">
             <summary>
@@ -502,12 +561,22 @@
             Id пользователя
             </summary>
         </member>
+        <member name="P:EventService.Features.Ticket.Commands.IssueATicket.IssueATicketCommand.Price">
+            <summary>
+            Цена
+            </summary>
+        </member>
+        <member name="P:EventService.Features.Ticket.Commands.IssueATicket.IssueATicketCommand.Authorization">
+            <summary>
+            поле для метода авторизации
+            </summary>
+        </member>
         <member name="T:EventService.Features.Ticket.Commands.IssueATicket.IssueATicketCommandRequestHandler">
             <summary>
             Класс обработчик команды выдачи билета на мероприятие
             </summary>
         </member>
-        <member name="M:EventService.Features.Ticket.Commands.IssueATicket.IssueATicketCommandRequestHandler.#ctor(EventService.Models.Interfaces.IBaseEventService)">
+        <member name="M:EventService.Features.Ticket.Commands.IssueATicket.IssueATicketCommandRequestHandler.#ctor(EventService.Models.Interfaces.IBaseEventService,EventService.ObjectStorage.HttpService.HttpServiceClient)">
             <summary>
             Конструктор
             </summary>
@@ -577,35 +646,6 @@
             Обработчик
             </summary>
         </member>
-        <member name="T:EventService.Identity.Config">
-            <summary>
-            Конфигурация для Identity Server
-            </summary>
-        </member>
-        <member name="M:EventService.Identity.Config.GetIdentityResources">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:EventService.Identity.Config.GetApiScopes">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:EventService.Identity.Config.GetApiResources">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:EventService.Identity.Config.GetClients">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:EventService.Identity.Selector">
             <summary>
             
@@ -619,36 +659,6 @@
         <member name="M:EventService.Identity.Selector.GetSchemeAndCredential(Microsoft.AspNetCore.Http.HttpContext)">
             <summary>
             
-            </summary>
-        </member>
-        <member name="T:EventService.Infrastructure.InterfaceImplements.BaseImageService">
-            <summary>
-            Сервис для работы с изображениями
-            </summary>
-        </member>
-        <member name="M:EventService.Infrastructure.InterfaceImplements.BaseImageService.#ctor">
-            <summary>
-            Конструктор
-            </summary>
-        </member>
-        <member name="M:EventService.Infrastructure.InterfaceImplements.BaseImageService.IsImageExists(System.Guid)">
-            <summary>
-            Метод проверки наличия изображения
-            </summary>
-        </member>
-        <member name="T:EventService.Infrastructure.InterfaceImplements.BaseSpaceService">
-            <summary>
-            Сервис работы с пространствами
-            </summary>
-        </member>
-        <member name="M:EventService.Infrastructure.InterfaceImplements.BaseSpaceService.#ctor">
-            <summary>
-            Конструктор
-            </summary>
-        </member>
-        <member name="M:EventService.Infrastructure.InterfaceImplements.BaseSpaceService.IsSpaceExists(System.Guid)">
-            <summary>
-            Метод проверки наличия пространства
             </summary>
         </member>
         <member name="T:EventService.Infrastructure.InterfaceImplements.BaseUserService">
@@ -721,6 +731,20 @@
             Метод проверки наличия места у билета
             </summary>
         </member>
+        <member name="M:EventService.Infrastructure.InterfaceImplements.EventMongoDbService.RemoveEventImageById(System.Guid)">
+            <summary>
+            Метод удаления изображения мероприятия
+            </summary>
+            <param name="idevent"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EventService.Infrastructure.InterfaceImplements.EventMongoDbService.RemoveSpaceEventById(System.Guid)">
+            <summary>
+            Метод удаления пространства мероприятия
+            </summary>
+            <param name="idevent"></param>
+            <returns></returns>
+        </member>
         <member name="T:EventService.Models.Entities.Event">
             <summary>
             Класс Мероприятия
@@ -776,29 +800,44 @@
             Проверка наличия свободных билетов
             </summary>
         </member>
-        <member name="T:EventService.Models.Entities.Image">
+        <member name="P:EventService.Models.Entities.Event.Price">
             <summary>
-            Класс изображения
+            Цена за билет
             </summary>
         </member>
-        <member name="P:EventService.Models.Entities.Image.Id">
+        <member name="T:EventService.Models.Entities.EventMessage">
             <summary>
-            Id изображения
+            Модель Событийного сообщения
             </summary>
         </member>
-        <member name="T:EventService.Models.Entities.Space">
+        <member name="P:EventService.Models.Entities.EventMessage.Type">
             <summary>
-            Пространство
+            Тип события
             </summary>
         </member>
-        <member name="P:EventService.Models.Entities.Space.Id">
+        <member name="P:EventService.Models.Entities.EventMessage.IdEntity">
             <summary>
-            Id пространства
+            Id элемента
             </summary>
         </member>
-        <member name="P:EventService.Models.Entities.Space.Name">
+        <member name="T:EventService.Models.Entities.TypeEvent">
             <summary>
-            Название пространства
+            Типы событий
+            </summary>
+        </member>
+        <member name="F:EventService.Models.Entities.TypeEvent.SpaceDeleteEvent">
+            <summary>
+            Событие удаления пространства
+            </summary>
+        </member>
+        <member name="F:EventService.Models.Entities.TypeEvent.ImageDeleteEvent">
+            <summary>
+            Событие удаление изображения
+            </summary>
+        </member>
+        <member name="F:EventService.Models.Entities.TypeEvent.EventDeleteEvent">
+            <summary>
+            Событие удаление мероприятия
             </summary>
         </member>
         <member name="T:EventService.Models.Entities.Ticket">
@@ -918,29 +957,32 @@
             <param name="idticket">билет</param>
             <returns>место либо null</returns>
         </member>
-        <member name="T:EventService.Models.Interfaces.IBaseImageService">
+        <member name="M:EventService.Models.Interfaces.IBaseEventService.RemoveEventImageById(System.Guid)">
             <summary>
-            Интерфейс для сервисов изображений
+            Удаление изображения мероприятия
+            </summary>
+            <param name="idevent"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EventService.Models.Interfaces.IBaseEventService.RemoveSpaceEventById(System.Guid)">
+            <summary>
+            Удаление пространства мероприятия
+            </summary>
+            <param name="idevent"></param>
+            <returns></returns>
+        </member>
+        <member name="T:EventService.Models.Interfaces.IBaseRabbitMqService">
+            <summary>
+            Интерфейс для работы RabbitMq
             </summary>
         </member>
-        <member name="M:EventService.Models.Interfaces.IBaseImageService.IsImageExists(System.Guid)">
+        <member name="M:EventService.Models.Interfaces.IBaseRabbitMqService.SendMessage``1(``0,System.String)">
             <summary>
-            наличие изображения
+            отправление сообщение в очередь
             </summary>
-            <param name="idimage">изображение</param>
-            <returns>результат проверки</returns>
-        </member>
-        <member name="T:EventService.Models.Interfaces.IBaseSpaceService">
-            <summary>
-            Интерфейс для сервисов пространств
-            </summary>
-        </member>
-        <member name="M:EventService.Models.Interfaces.IBaseSpaceService.IsSpaceExists(System.Guid)">
-            <summary>
-            проверка наличия пространства
-            </summary>
-            <param name="idspace">пространство</param>
-            <returns>результат проверки</returns>
+            <param name="message"></param>
+            <param name="queyename"></param>
+            <typeparam name="T"></typeparam>
         </member>
         <member name="T:EventService.Models.Interfaces.IBaseUserService">
             <summary>
@@ -963,6 +1005,50 @@
             <summary>
             Метод расширения, предназначенный для регистрации сервисов
             </summary>
+        </member>
+        <member name="T:EventService.ObjectStorage.HttpService.HttpServiceClient">
+            <summary>
+            сервис для работы с http
+            </summary>
+        </member>
+        <member name="M:EventService.ObjectStorage.HttpService.HttpServiceClient.#ctor(System.Net.Http.IHttpClientFactory)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="httpClientFactory"></param>
+        </member>
+        <member name="M:EventService.ObjectStorage.HttpService.HttpServiceClient.SendRequest``1(System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.String)">
+            <summary>
+            отправка запроса
+            </summary>
+            <param name="name"></param>
+            <param name="url"></param>
+            <param name="method"></param>
+            <param name="contents"></param>
+            <param name="authorization"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:EventService.ObjectStorage.RabbitMqService.BaseRabbitMqService">
+            <summary>
+            Сервис для работы с RabbitMq
+            </summary>
+        </member>
+        <member name="M:EventService.ObjectStorage.RabbitMqService.BaseRabbitMqService.#ctor(System.String,System.String,System.String,System.Int32,System.String)">
+            <summary>
+            конструктор
+            </summary>
+        </member>
+        <member name="M:EventService.ObjectStorage.RabbitMqService.BaseRabbitMqService.SendMessage``1(``0,System.String)">
+            <summary>
+            Отправка сообщения
+            </summary>
+            <param name="message"></param>
+            <param name="queyename"></param>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:EventService.ObjectStorage.RabbitMqService.BaseRabbitMqService.Dispose">
+            <inheritdoc />
         </member>
         <member name="T:EventService.ObjectStorage.ViewModels.EventViewModel">
             <summary>
@@ -1007,6 +1093,11 @@
         <member name="P:EventService.ObjectStorage.ViewModels.EventViewModel.IsTicketsAvailable">
             <summary>
             Проверка наличия свободных билетов
+            </summary>
+        </member>
+        <member name="P:EventService.ObjectStorage.ViewModels.EventViewModel.Price">
+            <summary>
+            цена
             </summary>
         </member>
         <member name="T:EventService.ObjectStorage.ViewModels.Mappers.EventServiceMapper">

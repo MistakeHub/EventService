@@ -48,6 +48,11 @@ public class EventViewModel
     /// </summary>
     public bool IsTicketsAvailable { get; set; }
 
+    /// <summary>
+    /// цена
+    /// </summary>
+    public decimal Price { get; set; }
+
 
 
 

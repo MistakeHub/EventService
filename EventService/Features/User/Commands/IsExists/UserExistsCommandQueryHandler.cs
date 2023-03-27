@@ -24,7 +24,7 @@ public class UserExistsCommandQueryHandler:IRequestHandler<UserExistsCommand, Sc
     /// <summary>
     /// Обработчик
     /// </summary>
-    public Task<ScResult<bool>> Handle(UserExistsCommand request, CancellationToken cancellationToken)
+    public  Task<ScResult<bool>> Handle(UserExistsCommand request, CancellationToken cancellationToken)
     {
         var returnResult = new ScResult<bool>();
 

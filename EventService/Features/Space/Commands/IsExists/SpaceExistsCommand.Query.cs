@@ -13,4 +13,8 @@ public class SpaceExistsCommand:IRequest<ScResult<bool>>
     /// Id пространства
     /// </summary>
     public Guid Id { get; set; }
+    /// <summary>
+    /// поле для типа авторизации
+    /// </summary>
+    public string? Authorization { get; set; } = null!;
 }

@@ -13,6 +13,11 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Bson;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using EventService.Infrastructure.InterfaceImplements;
+using Polly;
+using Polly.Extensions.Http;
+using EventService.ObjectStorage.HttpService;
+using EventService.ObjectStorage.RabbitMqService;
+
 
 namespace EventService.ObjectStorage.Helpers;
 
@@ -24,39 +29,29 @@ public static class ServiceRegister
     /// <summary>
     /// Метод расширения, предназначенный для регистрации сервисов
     /// </summary>
-    public static void AddServices(this IServiceCollection services)
+    public static void AddServices(this IServiceCollection services, IConfiguration appConfiguration)
     {
-
-
 
 #pragma warning disable CS0618
         services.AddControllers().AddFluentValidation(options => { options.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()); });
 #pragma warning restore CS0618
-        services.AddSingleton(new MongoClient("mongodb://root:foobar@MongoDb"));
+        services.AddSingleton(new MongoClient(appConfiguration["Mongodb"]));
         BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
 #pragma warning disable CS0618
         BsonDefaults.GuidRepresentation = GuidRepresentation.Standard;
 #pragma warning restore CS0618
-        services.AddIdentityServer(options =>
-            {
-                options.IssuerUri = "http://identity";
-            })
-            .AddDeveloperSigningCredential() // use a valid signing cert in production
-            .AddInMemoryIdentityResources(Config.GetIdentityResources())
-            .AddInMemoryApiResources(Config.GetApiResources())
-            .AddInMemoryApiScopes(Config.GetApiScopes())
-            .AddInMemoryClients(Config.GetClients());
+
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme,
             options =>
             {
-                options.Authority = "http://identity";
+                options.Authority = appConfiguration["Identity:Authority"];
                 // ReSharper disable once StringLiteralTypo решарпер хочет myApi
-                options.Audience = "myapi";
+                options.Audience = appConfiguration["Identity:Audience"];
                 options.RequireHttpsMetadata = false;
                 options.ForwardDefaultSelector = Selector.ForwardReferenceToken();
             }).AddOAuth2Introspection("introspection", options =>
         {
-            options.Authority = "http://identity";
+            options.Authority = appConfiguration["Identity:Authority"];
             // ReSharper disable once StringLiteralTypo решарпер хочет hardToGuess
             // ReSharper disable once StringLiteralTypo решарпер хочет myApi
             options.ClientSecret = "hardtoguess"; options.ClientId = "myapi";
@@ -67,18 +62,35 @@ public static class ServiceRegister
             {
                 AllowAll = true
             });
+ 
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddMediatR(opt => { opt.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()); });
         services.AddAutoMapper(typeof(Program));
+        services.AddSingleton<HttpServiceClient>();
+        services.AddSingleton<IBaseRabbitMqService>(_=>new BaseRabbitMqService(appConfiguration["RabbitMq:Hostname"]!, appConfiguration["RabbitMq:Username"]!, appConfiguration["RabbitMq:Password"]!, int.Parse(appConfiguration["RabbitMq:Port"]!), appConfiguration["RabbitMq:Virtualhost"]!));
         services.AddSingleton<IBaseEventService, EventMongoDbService>();
-        services.AddSingleton<IBaseImageService, BaseImageService>();
-        services.AddSingleton<IBaseSpaceService, BaseSpaceService>();
         services.AddSingleton<IBaseUserService, BaseUserService>();
+  
+        services.AddHttpClient();
+        services.AddHttpClient("image", client => client.BaseAddress = new Uri(appConfiguration["Httpclient:Image"]!)).AddPolicyHandler(_ =>
+        {
+            return HttpPolicyExtensions.HandleTransientHttpError().OrResult(v => !v.IsSuccessStatusCode)
+                .WaitAndRetryAsync(2, attempt => TimeSpan.FromSeconds(3 * attempt)); 
+        });
 
+        services.AddHttpClient("space",client=> client.BaseAddress = new Uri(appConfiguration["Httpclient:Space"]!)).AddPolicyHandler(_ =>
+        {
+            
+            return HttpPolicyExtensions.HandleTransientHttpError().OrResult(v => !v.IsSuccessStatusCode)
+                .WaitAndRetryAsync(2, attempt => TimeSpan.FromSeconds(3 * attempt)); 
+        });
 
+        services.AddHttpClient("payment", client => client.BaseAddress = new Uri(appConfiguration["Httpclient:Payment"]!)).AddPolicyHandler(_ =>
+        {
+            return HttpPolicyExtensions.HandleTransientHttpError().OrResult(v => !v.IsSuccessStatusCode)
+                .WaitAndRetryAsync(6, attempt => TimeSpan.FromSeconds(3 * attempt)); 
+        });
 
-
-   
 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         services.AddEndpointsApiExplorer();
@@ -90,4 +102,5 @@ public static class ServiceRegister
         });
     }
 
+   
 }

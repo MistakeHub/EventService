@@ -13,4 +13,9 @@ public class ImageExistsCommand:IRequest<ScResult<bool>>
     /// Id изображения
     /// </summary>
     public Guid Id { get; set; }
+
+    /// <summary>
+    /// поле для метода авторизации
+    /// </summary>
+    public string? Authorization { get; set; } = null!;
 }

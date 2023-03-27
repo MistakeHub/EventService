@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Shawn\\OpporRepositories\\EventService\\EventService\\EventService.csproj": {}
+    "F:\\OpporRepositories\\EventService\\EventService\\EventService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Shawn\\OpporRepositories\\EventService\\EventService\\EventService.csproj": {
+    "F:\\OpporRepositories\\EventService\\EventService\\EventService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Shawn\\OpporRepositories\\EventService\\EventService\\EventService.csproj",
+        "projectUniqueName": "F:\\OpporRepositories\\EventService\\EventService\\EventService.csproj",
         "projectName": "EventService",
-        "projectPath": "C:\\Users\\Shawn\\OpporRepositories\\EventService\\EventService\\EventService.csproj",
+        "projectPath": "F:\\OpporRepositories\\EventService\\EventService\\EventService.csproj",
         "packagesPath": "C:\\Users\\Shawn\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Shawn\\OpporRepositories\\EventService\\EventService\\obj\\",
+        "outputPath": "F:\\OpporRepositories\\EventService\\EventService\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,8 +32,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Shawn\\OpporRepositories\\EventService\\SC.Internship.Common\\SC.Internship.Common\\SC.Internship.Common.csproj": {
-                "projectPath": "C:\\Users\\Shawn\\OpporRepositories\\EventService\\SC.Internship.Common\\SC.Internship.Common\\SC.Internship.Common.csproj"
+              "F:\\OpporRepositories\\EventService\\SC.Internship.Common\\SC.Internship.Common\\SC.Internship.Common.csproj": {
+                "projectPath": "F:\\OpporRepositories\\EventService\\SC.Internship.Common\\SC.Internship.Common\\SC.Internship.Common.csproj"
               }
             }
           }
@@ -96,6 +96,14 @@
               "target": "Package",
               "version": "[7.0.0, )"
             },
+            "Microsoft.Extensions.Http": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.Extensions.Http.Polly": {
+              "target": "Package",
+              "version": "[7.0.4, )"
+            },
             "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
               "target": "Package",
               "version": "[1.17.0, )"
@@ -103,6 +111,14 @@
             "MongoDB.Driver": {
               "target": "Package",
               "version": "[2.19.0, )"
+            },
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            },
+            "RabbitMQ.Client.Core.DependencyInjection": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -136,14 +152,14 @@
         }
       }
     },
-    "C:\\Users\\Shawn\\OpporRepositories\\EventService\\SC.Internship.Common\\SC.Internship.Common\\SC.Internship.Common.csproj": {
+    "F:\\OpporRepositories\\EventService\\SC.Internship.Common\\SC.Internship.Common\\SC.Internship.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Shawn\\OpporRepositories\\EventService\\SC.Internship.Common\\SC.Internship.Common\\SC.Internship.Common.csproj",
+        "projectUniqueName": "F:\\OpporRepositories\\EventService\\SC.Internship.Common\\SC.Internship.Common\\SC.Internship.Common.csproj",
         "projectName": "SC.Internship.Common",
-        "projectPath": "C:\\Users\\Shawn\\OpporRepositories\\EventService\\SC.Internship.Common\\SC.Internship.Common\\SC.Internship.Common.csproj",
+        "projectPath": "F:\\OpporRepositories\\EventService\\SC.Internship.Common\\SC.Internship.Common\\SC.Internship.Common.csproj",
         "packagesPath": "C:\\Users\\Shawn\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Shawn\\OpporRepositories\\EventService\\SC.Internship.Common\\SC.Internship.Common\\obj\\",
+        "outputPath": "F:\\OpporRepositories\\EventService\\SC.Internship.Common\\SC.Internship.Common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

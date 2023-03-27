@@ -83,4 +83,19 @@ public interface IBaseEventService
     /// <param name="idticket">билет</param>
     /// <returns>место либо null</returns>
     public int? CheckSeat(Guid idevent, Guid idticket);
+
+    /// <summary>
+    /// Удаление изображения мероприятия
+    /// </summary>
+    /// <param name="idevent"></param>
+    /// <returns></returns>
+    public Guid? RemoveEventImageById(Guid idevent);
+
+    /// <summary>
+    /// Удаление пространства мероприятия
+    /// </summary>
+    /// <param name="idevent"></param>
+    /// <returns></returns>
+    public Guid? RemoveSpaceEventById(Guid idevent);
+
 }

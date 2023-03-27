@@ -1,5 +1,6 @@
 ﻿
-using EventService.Models.Interfaces;
+
+using EventService.ObjectStorage.HttpService;
 using MediatR;
 using SC.Internship.Common.Exceptions;
 using SC.Internship.Common.ScResult;
@@ -12,25 +13,28 @@ namespace EventService.Features.Image.Commands.IsExists;
 /// </summary>
 public class ImageExistsCommandQueryHandler:IRequestHandler<ImageExistsCommand, ScResult<bool>>
 {
-    private readonly IBaseImageService _baseImageService;
+  
+    private readonly HttpServiceClient _httpServiceClient;
 
     /// <summary>
     /// Конструктор
     /// </summary>
-    public ImageExistsCommandQueryHandler(IBaseImageService baseImageService) { _baseImageService = baseImageService; }
+    public ImageExistsCommandQueryHandler(HttpServiceClient httpServiceClient)
+    {
+        _httpServiceClient = httpServiceClient;
+
+    }
     /// <summary>
     /// обработчик
     /// </summary>
-    public Task<ScResult<bool>> Handle(ImageExistsCommand request, CancellationToken cancellationToken)
+    public async Task<ScResult<bool>> Handle(ImageExistsCommand request, CancellationToken cancellationToken)
     {
-        var returnResult = new ScResult<bool>();
 
-        var isExists =  _baseImageService.IsImageExists(request.Id);
+        var isExists = await _httpServiceClient.SendRequest<ScResult<bool>>
+            ("image",$"/isimageexists/{request.Id}", "Get",null!, request.Authorization!);
 
-        if (!isExists) throw new ScException("Изображение не существует");
+        if (!isExists.Result) throw new ScException("Изображение не существует");
 
-        returnResult.Result = isExists;
-    
-        return Task.FromResult(returnResult);
+        return isExists;
     }
 }

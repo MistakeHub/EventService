@@ -1,5 +1,6 @@
 ﻿
-using EventService.Models.Interfaces;
+
+using EventService.ObjectStorage.HttpService;
 using MediatR;
 using SC.Internship.Common.Exceptions;
 using SC.Internship.Common.ScResult;
@@ -12,27 +13,27 @@ namespace EventService.Features.Space.Commands.IsExists;
 /// </summary>
 public class SpaceExistsCommandQueryHandler : IRequestHandler<SpaceExistsCommand, ScResult<bool>>
 {
-    private readonly IBaseSpaceService _baseSpaceService;
+   
+    private readonly HttpServiceClient _httpServiceClient;
 
     /// <summary>
     /// Конструктор
     /// </summary>
 
-    public SpaceExistsCommandQueryHandler(IBaseSpaceService baseSpaceService) { _baseSpaceService=baseSpaceService; }
+    public SpaceExistsCommandQueryHandler(HttpServiceClient httpServiceClient)
+    {
+        _httpServiceClient = httpServiceClient;
+    }
     /// <summary>
     /// Обработчик
     /// </summary>
 
-    public Task<ScResult<bool>> Handle(SpaceExistsCommand request, CancellationToken cancellationToken)
+    public async Task<ScResult<bool>> Handle(SpaceExistsCommand request, CancellationToken cancellationToken)
     {
-        var returnResult = new ScResult<bool>();
+        var isExists =await _httpServiceClient.SendRequest<ScResult<bool>>("space",$"/isspaceexists/{request.Id}", "Get",null!, request.Authorization!);
 
-        var isExists = _baseSpaceService.IsSpaceExists(request.Id);
+        if (!isExists.Result) throw new ScException("Пространства не существует");
 
-        if (!isExists) throw new ScException("Пространства не существует");
-
-        returnResult.Result = isExists;
-
-        return Task.FromResult(returnResult);
+        return isExists;
     }
 }

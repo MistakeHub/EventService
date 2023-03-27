@@ -67,4 +67,9 @@ public class Event
     {
         get { return Tickets.Any(v => v.IdOwner == null); }
     }
+
+    /// <summary>
+    /// Цена за билет
+    /// </summary>
+    public decimal Price { get; set; } = 0;
 }

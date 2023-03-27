@@ -1,4 +1,5 @@
 ﻿
+using EventService.Models.Entities;
 using EventService.Models.Interfaces;
 using FluentValidation;
 using MediatR;
@@ -14,17 +15,21 @@ namespace EventService.Features.Event.Commands.Remove;
 public class RemoveEventCommandRequestHandler : IRequestHandler<RemoveEventCommand, ScResult<string>>
 {
     private readonly IBaseEventService _baseEventService;
-
+    private readonly IBaseRabbitMqService _baseRabbitMqService;
     /// <summary>
     /// Конструктор
     /// </summary>
-    public RemoveEventCommandRequestHandler(IBaseEventService baseEventService) { _baseEventService= baseEventService; }
+    public RemoveEventCommandRequestHandler(IBaseEventService baseEventService, IBaseRabbitMqService baseRabbitMqService) {
+        _baseRabbitMqService = baseRabbitMqService;
+        _baseEventService = baseEventService;
+    }
     /// <summary>
     /// Обработчик 
     /// </summary>
   
     public Task<ScResult<string>> Handle(RemoveEventCommand request, CancellationToken cancellationToken)
     {
+        
         var returnResult = new ScResult<string>();
         var validation = new RemoveEventCommandValidation();
         var errors = validation.Validate(request).Errors;
@@ -33,8 +38,9 @@ public class RemoveEventCommandRequestHandler : IRequestHandler<RemoveEventComma
 
          
         if (!resultDelete) throw new ScException("Мероприятие не было удалено");
+        _baseRabbitMqService.SendMessage(new EventMessage { IdEntity = request.Id, Type = TypeEvent.EventDeleteEvent }, "event");
         returnResult.Result= "Мероприятие было удалено";
-
+       
         return Task.FromResult(returnResult);
     }
 }

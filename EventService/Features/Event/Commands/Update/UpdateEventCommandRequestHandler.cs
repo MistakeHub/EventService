@@ -1,5 +1,7 @@
 ﻿
+
 using EventService.Models.Interfaces;
+
 using FluentValidation;
 using MediatR;
 using SC.Internship.Common.Exceptions;
@@ -14,10 +16,14 @@ namespace EventService.Features.Event.Commands.Update;
 public class UpdateEventCommandRequestHandler : IRequestHandler<UpdateEventCommand, ScResult<string>>
 {
     private readonly IBaseEventService _baseEventService;
+
     /// <summary>
     /// Конструктор
     /// </summary>
-    public UpdateEventCommandRequestHandler(IBaseEventService baseEventService) { _baseEventService = baseEventService; }
+    public UpdateEventCommandRequestHandler(IBaseEventService baseEventService)
+    {
+       
+        _baseEventService = baseEventService; }
     /// <summary>
     /// Обработчик 
     /// </summary>
@@ -30,11 +36,12 @@ public class UpdateEventCommandRequestHandler : IRequestHandler<UpdateEventComma
         var validationResult = validator.Validate(request);
         if (!validationResult.IsValid) throw new ScException(new ValidationException(validationResult.Errors), "ValidationException");
 
-
+      
         var resultUpdate = _baseEventService.UpdateEvent(request.Id, request.Start, request.End, request.Title, request.Description, request.IdImage, request.IdSpace);
         if (!resultUpdate) throw new ScException("Мероприятие не было обновлено");
         returnResult.Result=  "Мероприятие было обновлено";
-  
+       
+
         return Task.FromResult(returnResult);
     }
 }

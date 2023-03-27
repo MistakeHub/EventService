@@ -20,4 +20,12 @@ public class IssueATicketCommand : IRequest<ScResult<Models.Entities.Ticket>>
     /// </summary>
     public Guid IdOwner { get; set; }
 
+    /// <summary>
+    /// Цена
+    /// </summary>
+    public decimal Price { get; set; }
+    /// <summary>
+    /// поле для метода авторизации
+    /// </summary>
+    public string? Authorization { get; set; } = null!;
 }
