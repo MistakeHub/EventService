@@ -30,10 +30,10 @@ public class RabbitMqBackGround : BackgroundService
     }
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        stoppingToken.ThrowIfCancellationRequested();
-           
-            
-            
+        if (stoppingToken.IsCancellationRequested) Dispose();
+
+
+
         var consumer = new EventingBasicConsumer(_channel);
         await  Task.Run(() =>
         {

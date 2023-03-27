@@ -14,6 +14,7 @@ public class RabbitMqBackGround : BackgroundService
     // ReSharper disable once IdentifierTypo
     public RabbitMqBackGround(string queyename,string hostname, string username, string password, int port, string virtualhost)
     {
+       
         _queyename = queyename;
         var factory = new ConnectionFactory
         {
@@ -30,25 +31,24 @@ public class RabbitMqBackGround : BackgroundService
     }
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        stoppingToken.ThrowIfCancellationRequested();
-           
-            
-            
-        var consumer = new EventingBasicConsumer(_channel);
-        await  Task.Run(() =>
-        {
-            consumer.Received += (_, d) =>
+     
+            if(stoppingToken.IsCancellationRequested)Dispose();
+
+            var consumer = new EventingBasicConsumer(_channel);
+            await Task.Run(() =>
             {
+                consumer.Received += (_, d) =>
+                {
 
-                var json = System.Text.Encoding.UTF8.GetString(d.Body.ToArray());
-                var content = JsonSerializer.Deserialize<EventMessage>(json, options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-                Console.WriteLine($"{content.Type}, {content.IdEntity}");
-                _channel.BasicAck(d.DeliveryTag, false);
-            };
+                    var json = System.Text.Encoding.UTF8.GetString(d.Body.ToArray());
+                    var content = JsonSerializer.Deserialize<EventMessage>(json,
+                        options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                    Console.WriteLine($"{content.Type}, {content.IdEntity}");
+                    _channel.BasicAck(d.DeliveryTag, false);
+                };
+            }, stoppingToken);
+            _channel.BasicConsume(_queyename, true, consumer);
 
-        }, stoppingToken);  
-        _channel.BasicConsume(_queyename, true, consumer);
-          
     }
 
     public override void Dispose()

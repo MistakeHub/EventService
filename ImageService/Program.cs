@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 
 using SC.Internship.Common.ScResult;
-Thread.Sleep(5000);
 var builder = WebApplication.CreateBuilder(args);
 var appConfiguration = builder.Configuration;
 

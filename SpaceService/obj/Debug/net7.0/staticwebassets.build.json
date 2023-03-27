@@ -1,11 +1,23 @@
 {
   "Version": 1,
-  "Hash": "2WHJFKd+NP6OHbl0ajYZBg5zwO/D7KR8Ogd2fk9LG3c=",
+  "Hash": "DExxv9MDPjI15g+nO6MdYc7pD12EvvxT3EMyJZjpRyE=",
   "Source": "SpaceService",
   "BasePath": "_content/SpaceService",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "F:\\OpporRepositories\\EventService\\EventService\\EventService.csproj",
+      "Version": 2,
+      "Source": "EventService",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
   "DiscoveryPatterns": [],
   "Assets": []
 }

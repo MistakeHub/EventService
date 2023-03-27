@@ -209,8 +209,7 @@
             Контроллер мероприятия
             </summary>
         </member>
-	    <!-- ReSharper disable once MarkupAttributeTypo -->
-	    <member name="M:EventService.Features.Event.EventController.#ctor(MediatR.IMediator)">
+        <member name="M:EventService.Features.Event.EventController.#ctor(MediatR.IMediator)">
             <summary>
             Конструктор
             </summary>

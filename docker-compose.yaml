@@ -1,10 +1,20 @@
 version: '3.4'
 services:
+  rabbitmq:
+    container_name: rabbitmq
+    ports:
+    - 5672:5672
+    - 15672:15672
+    environment:
+    - RABBITMQ_DEFAULT_USER=user
+    - RABBITMQ_DEFAULT_PASS=password        
+    image: rabbitmq:3-management   
   eventservice_api:
     image: eventservice
     container_name: Eventservice
     depends_on:                     
     - mongodb 
+    - rabbitmq
     ports:
     - 8081:80
   identity:       
@@ -37,30 +47,25 @@ services:
     - MONGO_INITDB_ROOT_PASSWORD=foobar        
     ports:
     - 27018:27018
-  spaceservice_api:
-    image: space
-    container_name: space
+  paymentservice_api:
+    image: payment
+    container_name: payment
     ports:
-    - 8082:80
+    - 8084:80 
   imageservice_api:
     image: image
     container_name: image
     ports:
     - 8083:80
-  paymentservice_api:
-    image: payment
-    container_name: payment
+    depends_on:
+    - rabbitmq
+  spaceservice_api:
+    image: space
+    container_name: space
     ports:
-    - 8084:80
-  rabbitmq:
-      container_name: rabbitmq
-      ports:
-      - 5672:5672
-      - 15672:15672
-      environment:
-      - RABBITMQ_DEFAULT_USER=user
-      - RABBITMQ_DEFAULT_PASS=password        
-      image: rabbitmq:3-management    
+    - 8082:80
+    depends_on:
+    - rabbitmq
 networks:
     default:
      external: true
