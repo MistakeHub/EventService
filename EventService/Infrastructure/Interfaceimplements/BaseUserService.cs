@@ -1,5 +1,5 @@
-﻿using EventService.Models.Entities;
-using EventService.Models.Interfaces;
+﻿using EventService.Features.User;
+using EventService.Infrastructure.Interfaces;
 
 namespace EventService.Infrastructure.InterfaceImplements;
 
@@ -15,7 +15,7 @@ public class BaseUserService : IBaseUserService
     /// </summary>
     public BaseUserService()
     {
-        _users = new List<User> { new() { Id = new Guid("7fsdf16f-91eb-32b5-a5e3-0da8da49e90d"), Nickname = "Ольга" }, new() { Id = new Guid("7fsdf16f-91eb-32b5-a5e3-0da8da49e91d"), Nickname = "Гавриил" }, new() { Id = new Guid("7fsdf16f-91eb-32b5-a5e3-0da8da49e92d"), Nickname = "Никита" }, new() { Id = new Guid("7fsdf16f-91eb-32b5-a5e3-0da8da49e93d"), Nickname = "Сергей" } };
+        _users = new List<User> { new() { Id = new Guid("d23e79bb-0ccb-4f24-a6e9-2480cc7a179d"), Nickname = "Ольга" }, new() { Id = new Guid("d23e79bb-0ccb-4f24-a6e9-2480cc7a179d"), Nickname = "Гавриил" }, new() { Id = new Guid("aec7a486-eef4-43fc-88d2-f9b82a6b2ff2"), Nickname = "Никита" }, new() { Id = new Guid("55e63ae2-7669-4f8f-9756-67a5cc99973b"), Nickname = "Сергей" } };
 
     }
     /// <summary>
@@ -23,8 +23,8 @@ public class BaseUserService : IBaseUserService
     /// </summary>
 
     // ReSharper disable once IdentifierTypo
-    public bool IsUserExists(Guid iduser)
+    public Task<bool> IsUserExists(Guid iduser)
     {
-        return _users.Any(v => v.Id == iduser);
+        return Task.FromResult( _users.Any(v => v.Id == iduser));
     }
 }

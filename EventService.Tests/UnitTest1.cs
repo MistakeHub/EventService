@@ -1,12 +1,15 @@
-using EventService.Features.Event.Commands.Create;
-using EventService.Features.Ticket.Commands.SetFreeTickets;
 
-using EventService.Features.Ticket.Commands.IssueATicket;
 
+
+
+
+using EventService.Features.Event.Create;
+using AutoMapper;
+
+using EventService.Features.Ticket.SetFreeTickets;
 using EventService.Infrastructure.InterfaceImplements;
-
-using EventService.Models.Interfaces;
-
+using EventService.Infrastructure.Interfaces;
+using EventService.ObjectStorage.ViewModels.Mappers;
 using MongoDB.Driver;
 
 using SC.Internship.Common.Exceptions;
@@ -40,7 +43,7 @@ public class Tests
             IdSpace = new Guid("7febf16f-651b-43b0-a5e3-0da8da49e90d")
         };
 
-        Assert.Throws(typeof(ScException), () => { var unused = new CreateEventCommandRequestHandler(_eventService).Handle(command, new CancellationToken()).Result; });
+        Assert.Throws(typeof(ScException), () => { var unused = new CreateEventCommandRequestHandler(_eventService, new Mapper(new MapperConfiguration(v => v.AddProfile(typeof(EventServiceMapper))))).Handle(command, new CancellationToken()).Result; });
     }
     [Test]
     public void RightCreate()
@@ -57,24 +60,11 @@ public class Tests
             IdImage = new Guid("7febf16f-651b-43b0-a5e3-0da8da49e90d"),
             IdSpace = new Guid("7febf16f-651b-43b0-a5e3-0da8da49e90d")
         };
-        var result = new CreateEventCommandRequestHandler(_eventService).Handle(command, new CancellationToken()).Result;
+        var result = new CreateEventCommandRequestHandler(_eventService, new Mapper(new MapperConfiguration(v=>v.AddProfile(typeof(EventServiceMapper))))).Handle(command, new CancellationToken()).Result;
 
         Assert.AreEqual(result.GetType(), typeof(ScResult<string>));
     }
-    [Test]
-    public void TicketForNotExistUser()
-    {
-        var eventDefault=_eventService.GetAllEvents().FirstOrDefault();
-        var idNonUser = Guid.Empty;
-        if (eventDefault == null) return;
-        var command = new IssueATicketCommand
-        {
-            IdEvent = eventDefault.Id,
-            IdOwner = idNonUser
-        };
 
-        Assert.Throws(typeof(ScException), () => { var unused = new IssueATicketCommandRequestHandler(_eventService).Handle(command,new CancellationToken()).Result; });
-    }
 
     [Test]
     public void TicketsForNotExistEvent()
@@ -95,7 +85,7 @@ public class Tests
     public void TicketsForExistEvent()
     {
        
-        var eventDefault = _eventService.GetAllEvents().FirstOrDefault();
+        var eventDefault = _eventService.GetAllEvents().Result.FirstOrDefault();
         if (eventDefault == null) return;
         var command = new SetFreeTicketsCommand
         {

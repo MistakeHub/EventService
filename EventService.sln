@@ -7,7 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventService", "EventServic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SC.Internship.Common", "SC.Internship.Common\SC.Internship.Common\SC.Internship.Common.csproj", "{7FF4545E-10DE-4FE9-8B02-C16270600813}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventService.Tests", "EventService.Tests\EventService.Tests.csproj", "{AA69F5AF-0FCF-486D-88CE-C45BCC37690E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventService.Tests", "EventService.Tests\EventService.Tests.csproj", "{AA69F5AF-0FCF-486D-88CE-C45BCC37690E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageService", "ImageService\ImageService.csproj", "{E9087D7F-5963-433C-95EC-15A3A6983C27}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceService", "SpaceService\SpaceService.csproj", "{428D447F-EF66-4FBB-8F62-BD59E98DD652}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentService", "PaymentService\PaymentService.csproj", "{076DAC9E-BB6E-40AB-B31A-78EC89DA6E02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +33,18 @@ Global
 		{AA69F5AF-0FCF-486D-88CE-C45BCC37690E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA69F5AF-0FCF-486D-88CE-C45BCC37690E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA69F5AF-0FCF-486D-88CE-C45BCC37690E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9087D7F-5963-433C-95EC-15A3A6983C27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9087D7F-5963-433C-95EC-15A3A6983C27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9087D7F-5963-433C-95EC-15A3A6983C27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9087D7F-5963-433C-95EC-15A3A6983C27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{428D447F-EF66-4FBB-8F62-BD59E98DD652}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{428D447F-EF66-4FBB-8F62-BD59E98DD652}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{428D447F-EF66-4FBB-8F62-BD59E98DD652}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{428D447F-EF66-4FBB-8F62-BD59E98DD652}.Release|Any CPU.Build.0 = Release|Any CPU
+		{076DAC9E-BB6E-40AB-B31A-78EC89DA6E02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{076DAC9E-BB6E-40AB-B31A-78EC89DA6E02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{076DAC9E-BB6E-40AB-B31A-78EC89DA6E02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{076DAC9E-BB6E-40AB-B31A-78EC89DA6E02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

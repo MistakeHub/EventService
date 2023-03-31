@@ -3,6 +3,7 @@
 #Depending on the operating system of the host machines(s) that will build or run the containers, the image specified in the FROM statement may need to be changed.
 #For more information, please see https://aka.ms/containercompat
 
+
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
 EXPOSE 80
@@ -14,10 +15,10 @@ COPY ["SC.Internship.Common/SC.Internship.Common/SC.Internship.Common.csproj", "
 RUN dotnet restore "EventService/EventService.csproj"
 COPY . .
 
-RUN dotnet build "EventService/EventService.csproj" -c Release -o /app/build
+RUN dotnet build "EventService/EventService.csproj" -c Development -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "EventService/EventService.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "EventService/EventService.csproj" -c Development -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

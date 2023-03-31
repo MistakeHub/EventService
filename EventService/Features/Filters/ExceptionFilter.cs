@@ -22,17 +22,21 @@ public class ExceptionFilter :ActionFilterAttribute, IExceptionFilter
     public void OnException(ExceptionContext context)
     {
         var exception=context.Exception;
+        ScError scError;
         if (exception is ScException)
         {
-            ScError scError;
+            
             if (exception.InnerException is ValidationException validException)
             {
                 scError = new ScError
                     { Message = exception.Message, ModelState = new Dictionary<string, List<string>>() };
 
-                foreach (var error in validException.Errors)
+                foreach (var error in validException.Errors.GroupBy(v=>v.PropertyName))
                 {
-                    scError.ModelState.Add(error.PropertyName, new List<string> { error.ErrorMessage });
+                    scError.ModelState.Add(error.Key, new List<string>
+ {
+     error.Select(v=>v.ErrorMessage).FirstOrDefault() ?? string.Empty
+ } );
                 }
             }
             else
@@ -43,7 +47,12 @@ public class ExceptionFilter :ActionFilterAttribute, IExceptionFilter
             context.Result = new BadRequestObjectResult(new ScResult(scError));
 
         }
-        else context.Result = new BadRequestObjectResult(new ScResult<string>(exception.Message));
+        else
+        {
+            scError = new ScError { Message = exception.Message };
+            context.Result =new ObjectResult(new ScResult(scError)){StatusCode = 500};
+
+        }
 
 
 
