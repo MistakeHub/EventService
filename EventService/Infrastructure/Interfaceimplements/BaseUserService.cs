@@ -1,5 +1,5 @@
-﻿using EventService.Models.Entities;
-using EventService.Models.Interfaces;
+﻿using EventService.Features.User;
+using EventService.Infrastructure.Interfaces;
 
 namespace EventService.Infrastructure.InterfaceImplements;
 
@@ -23,8 +23,8 @@ public class BaseUserService : IBaseUserService
     /// </summary>
 
     // ReSharper disable once IdentifierTypo
-    public bool IsUserExists(Guid iduser)
+    public Task<bool> IsUserExists(Guid iduser)
     {
-        return _users.Any(v => v.Id == iduser);
+        return Task.FromResult( _users.Any(v => v.Id == iduser));
     }
 }

@@ -235,3 +235,4 @@ F:\OpporRepositories\EventService\EventService\bin\Debug\net7.0\Polly.dll
 F:\OpporRepositories\EventService\EventService\bin\Debug\net7.0\Polly.Extensions.Http.dll
 F:\OpporRepositories\EventService\EventService\bin\Debug\net7.0\RabbitMQ.Client.dll
 F:\OpporRepositories\EventService\EventService\bin\Debug\net7.0\RabbitMQ.Client.Core.DependencyInjection.dll
+F:\OpporRepositories\EventService\EventService\bin\Debug\net7.0\Newtonsoft.Json.Schema.dll

@@ -1,7 +1,7 @@
 ﻿
-using System.Net.Mime;
 using System.Text;
 using System.Text.Json;
+
 
 
 namespace EventService.ObjectStorage.HttpService;
@@ -32,44 +32,41 @@ public class HttpServiceClient
     /// <param name="authorization"></param>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public async Task<T> SendRequest<T>(string name,string url, string method, IDictionary<string, string>? contents=null!, string? authorization = null!)
+    public async Task<T> SendRequest<T>(string name, string url, string method,
+        IDictionary<string, string>? contents = null!, string? authorization = null!)
     {
-
-     
-
-        byte[] buffer;
+        // ReSharper disable once ConvertToUsingDeclaration
         using (var httpClient = _httpClientFactory.CreateClient(name))
         {
-            var request = new HttpRequestMessage { RequestUri = new Uri(httpClient.BaseAddress+url), Method = new HttpMethod(method) };
+
+            var request = new HttpRequestMessage
+                { RequestUri = new Uri(httpClient.BaseAddress + url), Method = new HttpMethod(method) };
+
             if (authorization != null) request.Headers.Add("Authorization", new List<string?> { authorization });
-            if (contents != null)
-            {
-                var content =
-                    new StringContent(
-                        JsonSerializer.Serialize(string.Join('\n', contents.Select(v => v.Key + ":" + v.Value)))
-                            .ToString(),
-                        Encoding.UTF8, MediaTypeNames.Application.Json);
-                request.Content = content;
-            }
+
             var response = await httpClient.SendAsync(request);
+
             // ReSharper disable once UseAwaitUsing не совсем понятно
-            using (var stream = await response.Content.ReadAsStreamAsync())
+            byte[] buffer;
+            await using (var stream = await response.Content.ReadAsStreamAsync())
             {
+
                 buffer = new byte[stream.Length];
-                
                 // ReSharper disable once MustUseReturnValue Решарпер предлагает объявить переменную.
                 stream.Read(buffer);
             }
+
+
+            var json = Encoding.UTF8.GetString(buffer);
+
+            var data = JsonSerializer.Deserialize<T>(json,
+                options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+
+            return data!;
         }
-
-        var json = Encoding.UTF8.GetString(buffer);
-
-        var data = JsonSerializer.Deserialize<T>(json, options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
-
-        return data!;
     }
 
-      
+
 
 }

@@ -11,12 +11,16 @@ services:
     image: rabbitmq:3-management   
   eventservice_api:
     image: eventservice
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
     container_name: Eventservice
     depends_on:                     
     - mongodb 
     - rabbitmq
     ports:
     - 8081:80
+    build:
+      dockerfile: Dockerfile
   identity:       
     image: bizzpo/identityserver4
     environment:
@@ -49,23 +53,35 @@ services:
     - 27018:27018
   paymentservice_api:
     image: payment
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
     container_name: payment
     ports:
-    - 8084:80 
+    - 8084:80
+    build:
+      dockerfile: PaymentService/Dockerfile
   imageservice_api:
     image: image
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
     container_name: image
     ports:
     - 8083:80
     depends_on:
     - rabbitmq
+    build:
+      dockerfile: ImageService/Dockerfile
   spaceservice_api:
     image: space
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
     container_name: space
     ports:
     - 8082:80
     depends_on:
     - rabbitmq
+    build:
+      dockerfile: SpaceService/Dockerfile
 networks:
     default:
      external: true

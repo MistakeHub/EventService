@@ -4,223 +4,149 @@
         <name>EventService</name>
     </assembly>
     <members>
-        <member name="T:EventService.Features.Event.Commands.Create.CreateEventCommand">
+        <member name="T:EventService.Features.Event.Create.CreateEventCommand">
             <summary>
             Команда для создания мероприятия
             </summary>
         </member>
-        <member name="P:EventService.Features.Event.Commands.Create.CreateEventCommand.Start">
+        <member name="P:EventService.Features.Event.Create.CreateEventCommand.Start">
             <summary>
             Дата начала мероприятия
             </summary>
         </member>
-        <member name="P:EventService.Features.Event.Commands.Create.CreateEventCommand.End">
+        <member name="P:EventService.Features.Event.Create.CreateEventCommand.End">
             <summary>
             Дата окончания мероприятия
             </summary>
         </member>
-        <member name="P:EventService.Features.Event.Commands.Create.CreateEventCommand.Title">
+        <member name="P:EventService.Features.Event.Create.CreateEventCommand.Title">
             <summary>
             Название мероприятия
             </summary>
         </member>
-        <member name="P:EventService.Features.Event.Commands.Create.CreateEventCommand.Description">
+        <member name="P:EventService.Features.Event.Create.CreateEventCommand.Description">
             <summary>
             Описание мероприятия
             </summary>
         </member>
-        <member name="P:EventService.Features.Event.Commands.Create.CreateEventCommand.IdImage">
+        <member name="P:EventService.Features.Event.Create.CreateEventCommand.IdImage">
             <summary>
             Id изображения мероприятия
             </summary>
         </member>
-        <member name="P:EventService.Features.Event.Commands.Create.CreateEventCommand.IdSpace">
+        <member name="P:EventService.Features.Event.Create.CreateEventCommand.IdSpace">
             <summary>
             Id пространства мероприятия
             </summary>
         </member>
-        <member name="T:EventService.Features.Event.Commands.Create.CreateEventCommandRequestHandler">
+        <member name="P:EventService.Features.Event.Create.CreateEventCommand.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="T:EventService.Features.Event.Create.CreateEventCommandRequestHandler">
             <summary>
             Класс обработчик запроса команды создания мероприятия
             </summary>
         </member>
-        <member name="M:EventService.Features.Event.Commands.Create.CreateEventCommandRequestHandler.#ctor(EventService.Models.Interfaces.IBaseEventService)">
+        <member name="M:EventService.Features.Event.Create.CreateEventCommandRequestHandler.#ctor(EventService.Infrastructure.Interfaces.IBaseEventService,AutoMapper.IMapper)">
             <summary>
             Конструктор
             </summary>
         </member>
-        <member name="M:EventService.Features.Event.Commands.Create.CreateEventCommandRequestHandler.Handle(EventService.Features.Event.Commands.Create.CreateEventCommand,System.Threading.CancellationToken)">
+        <member name="M:EventService.Features.Event.Create.CreateEventCommandRequestHandler.Handle(EventService.Features.Event.Create.CreateEventCommand,System.Threading.CancellationToken)">
             <summary>
             Обработчик
             </summary>
         </member>
-        <member name="T:EventService.Features.Event.Commands.Create.CreateEventCommandValidation">
+        <member name="T:EventService.Features.Event.Create.CreateEventCommandValidation">
             <summary>
             Класс конфигурации валидации команды создания мероприятия
             </summary>
         </member>
-        <member name="M:EventService.Features.Event.Commands.Create.CreateEventCommandValidation.#ctor">
+        <member name="M:EventService.Features.Event.Create.CreateEventCommandValidation.#ctor">
             <summary>
             Конфигурация валидации команды создания мероприятия
             </summary>
         </member>
-        <member name="T:EventService.Features.Event.Commands.GetAllForTheWeek.GetAllEventsForTheWeekCommand">
+        <member name="T:EventService.Features.Event.Event">
             <summary>
-            Команда получения всех мероприятий на неделю
+            Класс Мероприятия
             </summary>
         </member>
-        <member name="T:EventService.Features.Event.Commands.GetAllForTheWeek.GetAllEventsForTheWeekCommandQueryHandler">
-            <summary>
-            Класс обработчик команды получения всех мероприятий на неделю
-            </summary>
-        </member>
-        <member name="M:EventService.Features.Event.Commands.GetAllForTheWeek.GetAllEventsForTheWeekCommandQueryHandler.#ctor(EventService.Models.Interfaces.IBaseEventService,AutoMapper.IMapper)">
-            <summary>
-            Конструктор
-            </summary>
-        </member>
-        <member name="M:EventService.Features.Event.Commands.GetAllForTheWeek.GetAllEventsForTheWeekCommandQueryHandler.Handle(EventService.Features.Event.Commands.GetAllForTheWeek.GetAllEventsForTheWeekCommand,System.Threading.CancellationToken)">
-            <summary>
-            Обработчик
-            </summary>
-        </member>
-        <member name="T:EventService.Features.Event.Commands.GetAll.GetAllEventsCommand">
-            <summary>
-            Команда для получения всех мероприятий
-            </summary>
-        </member>
-        <member name="T:EventService.Features.Event.Commands.GetAll.GetAllEventsCommandQueryHandler">
-            <summary>
-            Класс обработчик команды получения всех мероприятий
-            </summary>
-        </member>
-        <member name="M:EventService.Features.Event.Commands.GetAll.GetAllEventsCommandQueryHandler.#ctor(EventService.Models.Interfaces.IBaseEventService,AutoMapper.IMapper)">
-            <summary>
-            Конструктор
-            </summary>
-        </member>
-        <member name="M:EventService.Features.Event.Commands.GetAll.GetAllEventsCommandQueryHandler.Handle(EventService.Features.Event.Commands.GetAll.GetAllEventsCommand,System.Threading.CancellationToken)">
-            <summary>
-            Обработчик
-            </summary>
-        </member>
-        <member name="T:EventService.Features.Event.Commands.Remove.RemoveEventCommand">
-            <summary>
-            Команда удаления мероприятия 
-            </summary>
-        </member>
-        <member name="P:EventService.Features.Event.Commands.Remove.RemoveEventCommand.Id">
+        <member name="P:EventService.Features.Event.Event.Id">
             <summary>
             Id мероприятия
             </summary>
         </member>
-        <member name="T:EventService.Features.Event.Commands.Remove.RemoveEventCommandRequestHandler">
-            <summary>
-            Класс обработчик команды удаления мероприятия
-            </summary>
-        </member>
-        <member name="M:EventService.Features.Event.Commands.Remove.RemoveEventCommandRequestHandler.#ctor(EventService.Models.Interfaces.IBaseEventService,EventService.Models.Interfaces.IBaseRabbitMqService)">
-            <summary>
-            Конструктор
-            </summary>
-        </member>
-        <member name="M:EventService.Features.Event.Commands.Remove.RemoveEventCommandRequestHandler.Handle(EventService.Features.Event.Commands.Remove.RemoveEventCommand,System.Threading.CancellationToken)">
-            <summary>
-            Обработчик 
-            </summary>
-        </member>
-        <member name="T:EventService.Features.Event.Commands.Remove.RemoveEventCommandValidation">
-            <summary>
-            Класс конфигурации валидации команды удаления мероприятия
-            </summary>
-        </member>
-        <member name="M:EventService.Features.Event.Commands.Remove.RemoveEventCommandValidation.#ctor">
-            <summary>
-            конфигурация
-            </summary>
-        </member>
-        <member name="T:EventService.Features.Event.Commands.Update.UpdateEventCommand">
-            <summary>
-            Команда обновления мероприятия
-            </summary>
-        </member>
-        <member name="P:EventService.Features.Event.Commands.Update.UpdateEventCommand.Id">
-             <summary>
-            Id мероприятия
-             </summary>
-        </member>
-        <member name="P:EventService.Features.Event.Commands.Update.UpdateEventCommand.Start">
+        <member name="P:EventService.Features.Event.Event.Start">
             <summary>
             Дата начала мероприятия
             </summary>
         </member>
-        <member name="P:EventService.Features.Event.Commands.Update.UpdateEventCommand.End">
+        <member name="P:EventService.Features.Event.Event.End">
             <summary>
             Дата окончания мероприятия
             </summary>
         </member>
-        <member name="P:EventService.Features.Event.Commands.Update.UpdateEventCommand.Title">
+        <member name="P:EventService.Features.Event.Event.Title">
             <summary>
             Название мероприятия
             </summary>
         </member>
-        <member name="P:EventService.Features.Event.Commands.Update.UpdateEventCommand.Description">
+        <member name="P:EventService.Features.Event.Event.Description">
             <summary>
             Описание мероприятия
             </summary>
         </member>
-        <member name="P:EventService.Features.Event.Commands.Update.UpdateEventCommand.IdImage">
+        <member name="P:EventService.Features.Event.Event.IdImage">
             <summary>
             Id изображения мероприятия
             </summary>
         </member>
-        <member name="P:EventService.Features.Event.Commands.Update.UpdateEventCommand.IdSpace">
+        <member name="P:EventService.Features.Event.Event.IdSpace">
             <summary>
             Id пространства мероприятия
             </summary>
         </member>
-        <member name="T:EventService.Features.Event.Commands.Update.UpdateEventCommandRequestHandler">
+        <member name="P:EventService.Features.Event.Event.Tickets">
             <summary>
-            Класс обработчик команды обновления мероприятия
+            Билеты на мероприятие
             </summary>
         </member>
-        <member name="M:EventService.Features.Event.Commands.Update.UpdateEventCommandRequestHandler.#ctor(EventService.Models.Interfaces.IBaseEventService)">
+        <member name="P:EventService.Features.Event.Event.HaveTicketsSeats">
             <summary>
-            Конструктор
+            Флаг наличия мест у билетов
             </summary>
         </member>
-        <member name="M:EventService.Features.Event.Commands.Update.UpdateEventCommandRequestHandler.Handle(EventService.Features.Event.Commands.Update.UpdateEventCommand,System.Threading.CancellationToken)">
+        <member name="P:EventService.Features.Event.Event.IsTicketsAvailable">
             <summary>
-            Обработчик 
+            Проверка наличия свободных билетов
             </summary>
         </member>
-        <member name="T:EventService.Features.Event.Commands.Update.UpdateEventCommandValidation">
+        <member name="P:EventService.Features.Event.Event.Price">
             <summary>
-            Класс конфигурации валидации команды обновления мероприятия
+            Цена за билет
             </summary>
         </member>
-        <member name="M:EventService.Features.Event.Commands.Update.UpdateEventCommandValidation.#ctor">
-            <summary>
-            Конфигурация
-            </summary>
-        </member>
-        <member name="T:EventService.Features.Event.EventController">
+        <member name="T:EventService.Features.Event.EventsController">
             <summary>
             Контроллер мероприятия
             </summary>
         </member>
-        <member name="M:EventService.Features.Event.EventController.#ctor(MediatR.IMediator)">
+	    <!-- ReSharper disable once MarkupAttributeTypo -->
+	    <member name="M:EventService.Features.Event.EventsController.#ctor(MediatR.IMediator)">
             <summary>
             Конструктор
             </summary>
             <param name="mediator"></param>
         </member>
-        <member name="M:EventService.Features.Event.EventController.GetAll">
+        <member name="M:EventService.Features.Event.EventsController.GetAll">
             <summary>
             Метод возращающий коллекцию мероприятий
             </summary>
         </member>
-        <member name="M:EventService.Features.Event.EventController.Post(EventService.Features.Event.RequestCreateEventModel)">
+        <member name="M:EventService.Features.Event.EventsController.Post(EventService.Features.Event.RequestCreateEventModel)">
             <summary>
             Метод создающий мероприятие
             </summary>
@@ -228,63 +154,214 @@
             <response code="400">Событие не было создано</response>
             <param name="model">Тестовое значение для idImage и idSpace:7febf16f-651b-43b0-a5e3-0da8da49e90d </param>
         </member>
-        <member name="M:EventService.Features.Event.EventController.Put(System.String,EventService.Features.Event.UpdateEventModel)">
+        <member name="M:EventService.Features.Event.EventsController.Put(System.String,EventService.Features.Event.UpdateEventModel)">
             <summary>
             Метод Обновляет информацию об определённом событие
             </summary>
             <response code="200">Событие было обновлено</response>
             <response code="400">Событие не было обновлено</response>
-            <param name="idevent">id мероприятия</param>
+            <param name="idEvent">id мероприятия</param>
             <param name="model">Тестовое значение для idImage и idSpace:7febf16f-651b-43b0-a5e3-0da8da49e90d </param>
         </member>
-        <member name="M:EventService.Features.Event.EventController.Delete(System.String)">
+        <member name="M:EventService.Features.Event.EventsController.Delete(System.String)">
             <summary>
             Метод удаляет определённое событие
             </summary>
             <response code="200">Событие удалено</response>
             <response code="400">Событие не было удалено</response>
-            <param name="idevent">id события</param>
+            <param name="idEvent">id события</param>
         </member>
-        <member name="M:EventService.Features.Event.EventController.GetAllOfTheWeek">
+        <member name="M:EventService.Features.Event.EventsController.GetAllOfTheWeek">
             <summary>
             Метод возвращающий все события, запланированные на неделю
             </summary>
         </member>
-        <member name="M:EventService.Features.Event.EventController.Put(System.String,System.Int32,System.Boolean)">
+        <member name="M:EventService.Features.Event.EventsController.Put(System.String,System.Int32,System.Boolean)">
             <summary>
             Метод создаёт билеты на определённое мероприятие определённого количества
             </summary>
             <response code="200">Билеты были успешно созданы</response>
             <response code="400">Билеты не были созданы</response>
-            <param name="idevent">Id мероприятия</param>
+            <param name="idEvent">Id мероприятия</param>
             <param name="count">количество билетов</param>
-            <param name="isautogeneratedplaces">Флаг автогенерации места для билета</param>
+            <param name="isAutoGeneratedPlaces">Флаг автогенерации места для билета</param>
         </member>
-        <member name="M:EventService.Features.Event.EventController.HaveATicket(System.String,System.String)">
+        <member name="M:EventService.Features.Event.EventsController.HaveATicket(System.String,System.String)">
             <summary>
             Проверяет у определённого пользователя наличие билета на определённое мероприятие
             </summary>
-            <param name="idevent">Id мероприятия</param>
-            /// <param name="idowner">Id предпологаемого владельца</param>
+            <param name="idEvent">Id мероприятия</param>
+            /// <param name="idOwner">Id предпологаемого владельца</param>
         </member>
-        <member name="M:EventService.Features.Event.EventController.IssueTicket(System.String,System.String,System.Decimal)">
+        <member name="M:EventService.Features.Event.EventsController.IssueTicket(System.String,System.String,System.Decimal)">
             <summary>
             Выдаёт билет на определённое мероприятие определённому пользователю
             </summary>
             <response code="200">Билет был успешно выдан</response>
             <response code="400">Билет не был выдан</response>
-            <param name="idevent">Id мероприятия</param>
-            <param name="idowner">Id пользователя</param>
+            <param name="idEvent">Id мероприятия</param>
+            <param name="idOwner">Id пользователя</param>
             <param name="price">цена за билет</param>
         </member>
-        <member name="M:EventService.Features.Event.EventController.CheckTicket(System.String,System.String)">
+        <member name="M:EventService.Features.Event.EventsController.CheckTicket(System.String,System.String)">
             <summary>
             Метод Проверяет, зарезервированно ли место на определённый билет
             </summary>
             <response code="200">У билета есть место</response>
             <response code="400">У билета не назначенно место</response>
-            <param name="idevent">Id мероприятия</param>
-            <param name="idticket">Id билета</param>
+            <param name="idEvent">Id мероприятия</param>
+            <param name="idTicket">Id билета</param>
+        </member>
+        <member name="T:EventService.Features.Event.EventViewModel">
+            <summary>
+            View model для мероприятия
+            </summary>
+        </member>
+        <member name="P:EventService.Features.Event.EventViewModel.Id">
+            <summary>
+            Id мероприятия
+            </summary>
+        </member>
+        <member name="P:EventService.Features.Event.EventViewModel.Start">
+            <summary>
+            Дата начала мероприятия
+            </summary>
+        </member>
+        <member name="P:EventService.Features.Event.EventViewModel.Title">
+            <summary>
+            Название мероприятия
+            </summary>
+        </member>
+        <member name="P:EventService.Features.Event.EventViewModel.Description">
+            <summary>
+            Описание мероприятия
+            </summary>
+        </member>
+        <member name="P:EventService.Features.Event.EventViewModel.IdImage">
+            <summary>
+            Id изображения мероприятия
+            </summary>
+        </member>
+        <member name="P:EventService.Features.Event.EventViewModel.IdSpace">
+            <summary>
+            Id пространства мероприятия
+            </summary>
+        </member>
+        <member name="P:EventService.Features.Event.EventViewModel.HaveTicketsSeats">
+            <summary>
+            Флаг наличия мест у билетов
+            </summary>
+        </member>
+        <member name="P:EventService.Features.Event.EventViewModel.IsTicketsAvailable">
+            <summary>
+            Проверка наличия свободных билетов
+            </summary>
+        </member>
+        <member name="P:EventService.Features.Event.EventViewModel.Price">
+            <summary>
+            цена
+            </summary>
+        </member>
+        <member name="T:EventService.Features.Event.GetAllForTheWeek.GetAllEventsForTheWeekCommand">
+            <summary>
+            Команда получения всех мероприятий на неделю
+            </summary>
+        </member>
+        <member name="T:EventService.Features.Event.GetAllForTheWeek.GetAllEventsForTheWeekCommandQueryHandler">
+            <summary>
+            Класс обработчик команды получения всех мероприятий на неделю
+            </summary>
+        </member>
+        <member name="M:EventService.Features.Event.GetAllForTheWeek.GetAllEventsForTheWeekCommandQueryHandler.#ctor(EventService.Infrastructure.Interfaces.IBaseEventService,AutoMapper.IMapper)">
+            <summary>
+            Конструктор
+            </summary>
+        </member>
+        <member name="M:EventService.Features.Event.GetAllForTheWeek.GetAllEventsForTheWeekCommandQueryHandler.Handle(EventService.Features.Event.GetAllForTheWeek.GetAllEventsForTheWeekCommand,System.Threading.CancellationToken)">
+            <summary>
+            Обработчик
+            </summary>
+        </member>
+        <member name="T:EventService.Features.Event.GetAll.GetAllEventsCommand">
+            <summary>
+            Команда для получения всех мероприятий
+            </summary>
+        </member>
+        <member name="T:EventService.Features.Event.GetAll.GetAllEventsCommandQueryHandler">
+            <summary>
+            Класс обработчик команды получения всех мероприятий
+            </summary>
+        </member>
+        <member name="M:EventService.Features.Event.GetAll.GetAllEventsCommandQueryHandler.#ctor(EventService.Infrastructure.Interfaces.IBaseEventService,AutoMapper.IMapper)">
+            <summary>
+            Конструктор
+            </summary>
+        </member>
+        <member name="M:EventService.Features.Event.GetAll.GetAllEventsCommandQueryHandler.Handle(EventService.Features.Event.GetAll.GetAllEventsCommand,System.Threading.CancellationToken)">
+            <summary>
+            Обработчик
+            </summary>
+        </member>
+        <member name="T:EventService.Features.Event.Remove.Notifications.RemoveEventNotify">
+            <inheritdoc />
+        </member>
+        <member name="P:EventService.Features.Event.Remove.Notifications.RemoveEventNotify.IdEvent">
+            <summary>
+            Id мероприятия 
+            </summary>
+        </member>
+        <member name="T:EventService.Features.Event.Remove.Notifications.RemoveEventNotifyHandler">
+            <inheritdoc />
+        </member>
+	    <!-- ReSharper disable once MarkupAttributeTypo -->
+	    <member name="M:EventService.Features.Event.Remove.Notifications.RemoveEventNotifyHandler.#ctor(MediatR.IMediator)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="mediator"></param>
+        </member>
+        <member name="M:EventService.Features.Event.Remove.Notifications.RemoveEventNotifyHandler.Handle(EventService.Features.Event.Remove.Notifications.RemoveEventNotify,System.Threading.CancellationToken)">
+            <summary>
+            Хэндлер 
+            </summary>
+            <param name="notification"></param>
+            <param name="cancellationToken"></param>
+        </member>
+        <member name="T:EventService.Features.Event.Remove.RemoveEventCommand">
+            <summary>
+            Команда удаления мероприятия 
+            </summary>
+        </member>
+        <member name="P:EventService.Features.Event.Remove.RemoveEventCommand.Id">
+            <summary>
+            Id мероприятия
+            </summary>
+        </member>
+        <member name="T:EventService.Features.Event.Remove.RemoveEventCommandRequestHandler">
+            <summary>
+            Класс обработчик команды удаления мероприятия
+            </summary>
+        </member>
+	    <!-- ReSharper disable once MarkupAttributeTypo -->
+	    <member name="M:EventService.Features.Event.Remove.RemoveEventCommandRequestHandler.#ctor(EventService.Infrastructure.Interfaces.IBaseEventService,MediatR.IMediator)">
+            <summary>
+            Конструктор
+            </summary>
+        </member>
+        <member name="M:EventService.Features.Event.Remove.RemoveEventCommandRequestHandler.Handle(EventService.Features.Event.Remove.RemoveEventCommand,System.Threading.CancellationToken)">
+            <summary>
+            Обработчик 
+            </summary>
+        </member>
+        <member name="T:EventService.Features.Event.Remove.RemoveEventCommandValidation">
+            <summary>
+            Класс конфигурации валидации команды удаления мероприятия
+            </summary>
+        </member>
+        <member name="M:EventService.Features.Event.Remove.RemoveEventCommandValidation.#ctor">
+            <summary>
+            конфигурация
+            </summary>
         </member>
         <member name="T:EventService.Features.Event.RequestCreateEventModel">
             <summary>
@@ -356,6 +433,140 @@
             Id пространства мероприятия
             </summary>
         </member>
+        <member name="T:EventService.Features.Event.Update.Notifications.RemoveImage.RemoveImageUpdateEvent">
+            <summary>
+            Команда оповещения об удалении изображения 
+            </summary>
+        </member>
+        <member name="P:EventService.Features.Event.Update.Notifications.RemoveImage.RemoveImageUpdateEvent.IdImage">
+            <summary>
+            Id изображения
+            </summary>
+        </member>
+        <member name="T:EventService.Features.Event.Update.Notifications.RemoveImage.RemoveImageUpdateEventHandler">
+            <summary>
+            Оповещение об удалении изображения
+            </summary>
+        </member>
+	    <!-- ReSharper disable once MarkupAttributeTypo -->
+	    <member name="M:EventService.Features.Event.Update.Notifications.RemoveImage.RemoveImageUpdateEventHandler.#ctor(MediatR.IMediator)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="mediator"></param>
+        </member>
+        <member name="M:EventService.Features.Event.Update.Notifications.RemoveImage.RemoveImageUpdateEventHandler.Handle(EventService.Features.Event.Update.Notifications.RemoveImage.RemoveImageUpdateEvent,System.Threading.CancellationToken)">
+            <summary>
+            Хэндлер 
+            </summary>
+            <param name="notification"></param>
+            <param name="cancellationToken"></param>
+        </member>
+        <member name="T:EventService.Features.Event.Update.Notifications.RemoveSpace.RemoveSpaceUpdateEvent">
+            <summary>
+            Команда оповещения об удалении пространства 
+            </summary>
+        </member>
+        <member name="P:EventService.Features.Event.Update.Notifications.RemoveSpace.RemoveSpaceUpdateEvent.IdSpace">
+            <summary>
+            Id пространства
+            </summary>
+        </member>
+        <member name="P:EventService.Features.Event.Update.Notifications.RemoveSpace.RemoveSpaceUpdateEvent.IdEvent">
+            <summary>
+            Id мероприятия 
+            </summary>
+        </member>
+        <member name="T:EventService.Features.Event.Update.Notifications.RemoveSpace.RemoveSpaceUpdateEventHandler">
+            <summary>
+            Оповещение об удалении пространства
+            </summary>
+        </member>
+	    <!-- ReSharper disable once MarkupAttributeTypo -->
+	    <member name="M:EventService.Features.Event.Update.Notifications.RemoveSpace.RemoveSpaceUpdateEventHandler.#ctor(MediatR.IMediator)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="mediator"></param>
+        </member>
+        <member name="M:EventService.Features.Event.Update.Notifications.RemoveSpace.RemoveSpaceUpdateEventHandler.Handle(EventService.Features.Event.Update.Notifications.RemoveSpace.RemoveSpaceUpdateEvent,System.Threading.CancellationToken)">
+            <summary>
+            Хэндлер 
+            </summary>
+            <param name="notification"></param>
+            <param name="cancellationToken"></param>
+        </member>
+        <member name="T:EventService.Features.Event.Update.UpdateEventCommand">
+            <summary>
+            Команда обновления мероприятия
+            </summary>
+        </member>
+        <member name="P:EventService.Features.Event.Update.UpdateEventCommand.Id">
+             <summary>
+            Id мероприятия
+             </summary>
+        </member>
+        <member name="P:EventService.Features.Event.Update.UpdateEventCommand.Start">
+            <summary>
+            Дата начала мероприятия
+            </summary>
+        </member>
+        <member name="P:EventService.Features.Event.Update.UpdateEventCommand.End">
+            <summary>
+            Дата окончания мероприятия
+            </summary>
+        </member>
+        <member name="P:EventService.Features.Event.Update.UpdateEventCommand.Title">
+            <summary>
+            Название мероприятия
+            </summary>
+        </member>
+        <member name="P:EventService.Features.Event.Update.UpdateEventCommand.Description">
+            <summary>
+            Описание мероприятия
+            </summary>
+        </member>
+        <member name="P:EventService.Features.Event.Update.UpdateEventCommand.Price">
+            <summary>
+            Цена
+            </summary>
+        </member>
+        <member name="P:EventService.Features.Event.Update.UpdateEventCommand.IdImage">
+            <summary>
+            Id изображения мероприятия
+            </summary>
+        </member>
+        <member name="P:EventService.Features.Event.Update.UpdateEventCommand.IdSpace">
+            <summary>
+            Id пространства мероприятия
+            </summary>
+        </member>
+        <member name="T:EventService.Features.Event.Update.UpdateEventCommandRequestHandler">
+            <summary>
+            Класс обработчик команды обновления мероприятия
+            </summary>
+        </member>
+	    <!-- ReSharper disable once MarkupAttributeTypo -->
+	    <member name="M:EventService.Features.Event.Update.UpdateEventCommandRequestHandler.#ctor(EventService.Infrastructure.Interfaces.IBaseEventService,MediatR.IMediator,AutoMapper.IMapper)">
+            <summary>
+            Конструктор
+            </summary>
+        </member>
+        <member name="M:EventService.Features.Event.Update.UpdateEventCommandRequestHandler.Handle(EventService.Features.Event.Update.UpdateEventCommand,System.Threading.CancellationToken)">
+            <summary>
+            Обработчик 
+            </summary>
+        </member>
+        <member name="T:EventService.Features.Event.Update.UpdateEventCommandValidation">
+            <summary>
+            Класс конфигурации валидации команды обновления мероприятия
+            </summary>
+        </member>
+        <member name="M:EventService.Features.Event.Update.UpdateEventCommandValidation.#ctor">
+            <summary>
+            Конфигурация
+            </summary>
+        </member>
         <member name="T:EventService.Features.Filters.ExceptionFilter">
             <summary>
             Фильтр обработки исключений 
@@ -367,283 +578,384 @@
             </summary>
             <param name="context"></param>
         </member>
-        <member name="T:EventService.Features.Image.Commands.IsExists.ImageExistsCommand">
+        <member name="T:EventService.Features.Filters.ValidationBehavior`2">
+            <inheritdoc />
+        </member>
+        <member name="M:EventService.Features.Filters.ValidationBehavior`2.#ctor(System.Collections.Generic.IEnumerable{FluentValidation.IValidator{`0}})">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="validators"></param>
+        </member>
+	    <!-- ReSharper disable once MarkupAttributeTypo -->
+	    <member name="M:EventService.Features.Filters.ValidationBehavior`2.Handle(`0,MediatR.RequestHandlerDelegate{`1},System.Threading.CancellationToken)">
+            <summary>
+            Хэндлер
+            </summary>
+        </member>
+        <member name="T:EventService.Features.Image.IsExists.ImageExistsCommand">
             <summary>
             Команда проверки наличия изображения
             </summary>
         </member>
-        <member name="P:EventService.Features.Image.Commands.IsExists.ImageExistsCommand.Id">
+        <member name="P:EventService.Features.Image.IsExists.ImageExistsCommand.Id">
             <summary>
             Id изображения
             </summary>
         </member>
-        <member name="P:EventService.Features.Image.Commands.IsExists.ImageExistsCommand.Authorization">
+        <member name="P:EventService.Features.Image.IsExists.ImageExistsCommand.Authorization">
             <summary>
             поле для метода авторизации
             </summary>
         </member>
-        <member name="T:EventService.Features.Image.Commands.IsExists.ImageExistsCommandQueryHandler">
+        <member name="T:EventService.Features.Image.IsExists.ImageExistsCommandQueryHandler">
             <summary>
             Класс обработчик команды проверки наличия изображения
             </summary>
         </member>
-        <member name="M:EventService.Features.Image.Commands.IsExists.ImageExistsCommandQueryHandler.#ctor(EventService.ObjectStorage.HttpService.HttpServiceClient)">
+        <member name="M:EventService.Features.Image.IsExists.ImageExistsCommandQueryHandler.#ctor(EventService.ObjectStorage.HttpService.HttpServiceClient)">
             <summary>
             Конструктор
             </summary>
         </member>
-        <member name="M:EventService.Features.Image.Commands.IsExists.ImageExistsCommandQueryHandler.Handle(EventService.Features.Image.Commands.IsExists.ImageExistsCommand,System.Threading.CancellationToken)">
+        <member name="M:EventService.Features.Image.IsExists.ImageExistsCommandQueryHandler.Handle(EventService.Features.Image.IsExists.ImageExistsCommand,System.Threading.CancellationToken)">
             <summary>
             обработчик
             </summary>
         </member>
-        <member name="T:EventService.Features.Image.Commands.Remove.RemoveImageEvent">
+        <member name="T:EventService.Features.RabbitMq.EventMessage">
             <summary>
-            Команда для удаления изображения мероприятия
+            Модель Событийного сообщения
             </summary>
         </member>
-        <member name="P:EventService.Features.Image.Commands.Remove.RemoveImageEvent.IdEvent">
+        <member name="P:EventService.Features.RabbitMq.EventMessage.Type">
             <summary>
-            Id мероприятия
+            Тип события
             </summary>
         </member>
-        <member name="T:EventService.Features.Image.Commands.Remove.RemoveImageEventRequestHandler">
+        <member name="P:EventService.Features.RabbitMq.EventMessage.IdEntity">
             <summary>
-            Класс обработчик команды удаления изображения из мероприятия 
+            Id элемента
             </summary>
         </member>
-        <member name="M:EventService.Features.Image.Commands.Remove.RemoveImageEventRequestHandler.#ctor(EventService.Models.Interfaces.IBaseEventService,EventService.Models.Interfaces.IBaseRabbitMqService)">
+        <member name="T:EventService.Features.RabbitMq.TypeEvent">
+            <summary>
+            Типы событий
+            </summary>
+        </member>
+        <member name="F:EventService.Features.RabbitMq.TypeEvent.SpaceDeleteEvent">
+            <summary>
+            Событие удаления пространства
+            </summary>
+        </member>
+        <member name="F:EventService.Features.RabbitMq.TypeEvent.ImageDeleteEvent">
+            <summary>
+            Событие удаление изображения
+            </summary>
+        </member>
+        <member name="F:EventService.Features.RabbitMq.TypeEvent.EventDeleteEvent">
+            <summary>
+            Событие удаление мероприятия
+            </summary>
+        </member>
+        <member name="T:EventService.Features.RabbitMq.SendMessage.SendRabbitMqMessage">
+            <summary>
+            Команда отправки сообщения в очередь сообщений
+            </summary>
+        </member>
+        <member name="P:EventService.Features.RabbitMq.SendMessage.SendRabbitMqMessage.Message">
+            <summary>
+            Сообщение
+            </summary>
+        </member>
+        <member name="P:EventService.Features.RabbitMq.SendMessage.SendRabbitMqMessage.Queyename">
+            <summary>
+            Название очереди
+            </summary>
+        </member>
+        <member name="T:EventService.Features.RabbitMq.SendMessage.SendRabbitMqMessageRequestHandler">
+            <inheritdoc />
+        </member>
+        <member name="M:EventService.Features.RabbitMq.SendMessage.SendRabbitMqMessageRequestHandler.#ctor(EventService.Infrastructure.Interfaces.IBaseRabbitMqService)">
             <summary>
             Конструктор
             </summary>
+            <param name="baseRabbitMqService"></param>
         </member>
-        <member name="M:EventService.Features.Image.Commands.Remove.RemoveImageEventRequestHandler.Handle(EventService.Features.Image.Commands.Remove.RemoveImageEvent,System.Threading.CancellationToken)">
-            <summary>
-            Обработчик
-            </summary>
-            <param name="request"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-            <exception cref="T:SC.Internship.Common.Exceptions.ScException"></exception>
+        <member name="M:EventService.Features.RabbitMq.SendMessage.SendRabbitMqMessageRequestHandler.Handle(EventService.Features.RabbitMq.SendMessage.SendRabbitMqMessage,System.Threading.CancellationToken)">
+            <inheritdoc />
         </member>
-        <member name="T:EventService.Features.Space.Commands.IsExists.SpaceExistsCommand">
+        <member name="T:EventService.Features.Space.IsExists.SpaceExistsCommand">
             <summary>
              Команда проверки наличия пространства
             </summary>
         </member>
-        <member name="P:EventService.Features.Space.Commands.IsExists.SpaceExistsCommand.Id">
+        <member name="P:EventService.Features.Space.IsExists.SpaceExistsCommand.Id">
             <summary>
             Id пространства
             </summary>
         </member>
-        <member name="P:EventService.Features.Space.Commands.IsExists.SpaceExistsCommand.Authorization">
+        <member name="P:EventService.Features.Space.IsExists.SpaceExistsCommand.Authorization">
             <summary>
             поле для типа авторизации
             </summary>
         </member>
-        <member name="T:EventService.Features.Space.Commands.IsExists.SpaceExistsCommandQueryHandler">
+        <member name="T:EventService.Features.Space.IsExists.SpaceExistsCommandQueryHandler">
             <summary>
             Класс обработчик команды проверки наличия изображения
             </summary>
         </member>
-        <member name="M:EventService.Features.Space.Commands.IsExists.SpaceExistsCommandQueryHandler.#ctor(EventService.ObjectStorage.HttpService.HttpServiceClient)">
+        <member name="M:EventService.Features.Space.IsExists.SpaceExistsCommandQueryHandler.#ctor(EventService.ObjectStorage.HttpService.HttpServiceClient)">
             <summary>
             Конструктор
             </summary>
         </member>
-        <member name="M:EventService.Features.Space.Commands.IsExists.SpaceExistsCommandQueryHandler.Handle(EventService.Features.Space.Commands.IsExists.SpaceExistsCommand,System.Threading.CancellationToken)">
+        <member name="M:EventService.Features.Space.IsExists.SpaceExistsCommandQueryHandler.Handle(EventService.Features.Space.IsExists.SpaceExistsCommand,System.Threading.CancellationToken)">
             <summary>
             Обработчик
             </summary>
         </member>
-        <member name="T:EventService.Features.Space.Commands.Remove.RemoveSpaceEvent">
-            <summary>
-            Команда для удаления пространства мероприятия
-            </summary>
-        </member>
-        <member name="P:EventService.Features.Space.Commands.Remove.RemoveSpaceEvent.IdEvent">
-            <summary>
-            Id мероприятия 
-            </summary>
-        </member>
-        <member name="T:EventService.Features.Space.Commands.Remove.RemoveSpaceEventRequestHandler">
-            <summary>
-            Класс обработчик команды удаления пространства
-            </summary>
-        </member>
-        <member name="M:EventService.Features.Space.Commands.Remove.RemoveSpaceEventRequestHandler.#ctor(EventService.Models.Interfaces.IBaseEventService,EventService.Models.Interfaces.IBaseRabbitMqService)">
-            <summary>
-            Конструктор
-            </summary>
-        </member>
-        <member name="M:EventService.Features.Space.Commands.Remove.RemoveSpaceEventRequestHandler.Handle(EventService.Features.Space.Commands.Remove.RemoveSpaceEvent,System.Threading.CancellationToken)">
-            <summary>
-            Обработчик 
-            </summary>
-            <param name="request"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-            <exception cref="T:SC.Internship.Common.Exceptions.ScException"></exception>
-        </member>
-        <member name="T:EventService.Features.Ticket.Commands.CheckSeat.CheckSeatCommand">
+        <member name="T:EventService.Features.Ticket.CheckSeat.CheckSeatCommand">
             <summary>
             Команда проверки наличия места
             </summary>
         </member>
-        <member name="P:EventService.Features.Ticket.Commands.CheckSeat.CheckSeatCommand.IdEvent">
+        <member name="P:EventService.Features.Ticket.CheckSeat.CheckSeatCommand.IdEvent">
             <summary>
             Id мероприятия
             </summary>
         </member>
-        <member name="P:EventService.Features.Ticket.Commands.CheckSeat.CheckSeatCommand.IdTicket">
+        <member name="P:EventService.Features.Ticket.CheckSeat.CheckSeatCommand.IdTicket">
             <summary>
             Id места
             </summary>
         </member>
-        <member name="T:EventService.Features.Ticket.Commands.CheckSeat.CheckSeatCommandQueryHandler">
+        <member name="T:EventService.Features.Ticket.CheckSeat.CheckSeatCommandQueryHandler">
             <summary>
             Класс обработчик команды проверки наличия места
             </summary>
         </member>
-        <member name="M:EventService.Features.Ticket.Commands.CheckSeat.CheckSeatCommandQueryHandler.#ctor(EventService.Models.Interfaces.IBaseEventService)">
+        <member name="M:EventService.Features.Ticket.CheckSeat.CheckSeatCommandQueryHandler.#ctor(EventService.Infrastructure.Interfaces.IBaseEventService)">
             <summary>
             Конструктор
             </summary>
         </member>
-        <member name="M:EventService.Features.Ticket.Commands.CheckSeat.CheckSeatCommandQueryHandler.Handle(EventService.Features.Ticket.Commands.CheckSeat.CheckSeatCommand,System.Threading.CancellationToken)">
+        <member name="M:EventService.Features.Ticket.CheckSeat.CheckSeatCommandQueryHandler.Handle(EventService.Features.Ticket.CheckSeat.CheckSeatCommand,System.Threading.CancellationToken)">
             <summary>
             Обработчик
             </summary>
         </member>
-        <member name="T:EventService.Features.Ticket.Commands.HaveATicket.HaveATicketCommand">
+        <member name="T:EventService.Features.Ticket.HaveATicket.HaveATicketCommand">
             <summary>
             Команда проверки наличия билета на мероприятие
             </summary>
         </member>
-        <member name="P:EventService.Features.Ticket.Commands.HaveATicket.HaveATicketCommand.IdOwner">
+        <member name="P:EventService.Features.Ticket.HaveATicket.HaveATicketCommand.IdOwner">
             <summary>
             Id пользователя
             </summary>
         </member>
-        <member name="P:EventService.Features.Ticket.Commands.HaveATicket.HaveATicketCommand.IdEvent">
+        <member name="P:EventService.Features.Ticket.HaveATicket.HaveATicketCommand.IdEvent">
             <summary>
             Id мероприятия
             </summary>
         </member>
-        <member name="T:EventService.Features.Ticket.Commands.HaveATicket.HaveATicketCommandQueryHandler">
+        <member name="T:EventService.Features.Ticket.HaveATicket.HaveATicketCommandQueryHandler">
             <summary>
             Класс обработчик команды проверки наличия билета
             </summary>
         </member>
-        <member name="M:EventService.Features.Ticket.Commands.HaveATicket.HaveATicketCommandQueryHandler.#ctor(EventService.Models.Interfaces.IBaseEventService)">
+        <member name="M:EventService.Features.Ticket.HaveATicket.HaveATicketCommandQueryHandler.#ctor(EventService.Infrastructure.Interfaces.IBaseEventService)">
             <summary>
             Конструктор
             </summary>
             <param name="baseEventService"></param>
         </member>
-        <member name="M:EventService.Features.Ticket.Commands.HaveATicket.HaveATicketCommandQueryHandler.Handle(EventService.Features.Ticket.Commands.HaveATicket.HaveATicketCommand,System.Threading.CancellationToken)">
+        <member name="M:EventService.Features.Ticket.HaveATicket.HaveATicketCommandQueryHandler.Handle(EventService.Features.Ticket.HaveATicket.HaveATicketCommand,System.Threading.CancellationToken)">
             <summary>
             Обработчик
             </summary>
         </member>
-        <member name="T:EventService.Features.Ticket.Commands.IssueATicket.IssueATicketCommand">
+        <member name="T:EventService.Features.Ticket.IssueATicket.IssueATicketCommand">
             <summary>
             Команда выдачи билета на мероприятие
             </summary>
         </member>
-        <member name="P:EventService.Features.Ticket.Commands.IssueATicket.IssueATicketCommand.IdEvent">
+        <member name="P:EventService.Features.Ticket.IssueATicket.IssueATicketCommand.IdEvent">
             <summary>
             Id мероприятия
             </summary>
         </member>
-        <member name="P:EventService.Features.Ticket.Commands.IssueATicket.IssueATicketCommand.IdOwner">
+        <member name="P:EventService.Features.Ticket.IssueATicket.IssueATicketCommand.IdOwner">
             <summary>
             Id пользователя
             </summary>
         </member>
-        <member name="P:EventService.Features.Ticket.Commands.IssueATicket.IssueATicketCommand.Price">
+        <member name="P:EventService.Features.Ticket.IssueATicket.IssueATicketCommand.Price">
             <summary>
             Цена
             </summary>
         </member>
-        <member name="P:EventService.Features.Ticket.Commands.IssueATicket.IssueATicketCommand.Authorization">
+        <member name="P:EventService.Features.Ticket.IssueATicket.IssueATicketCommand.Authorization">
             <summary>
             поле для метода авторизации
             </summary>
         </member>
-        <member name="T:EventService.Features.Ticket.Commands.IssueATicket.IssueATicketCommandRequestHandler">
+        <member name="T:EventService.Features.Ticket.IssueATicket.IssueATicketCommandRequestHandler">
             <summary>
             Класс обработчик команды выдачи билета на мероприятие
             </summary>
         </member>
-        <member name="M:EventService.Features.Ticket.Commands.IssueATicket.IssueATicketCommandRequestHandler.#ctor(EventService.Models.Interfaces.IBaseEventService,EventService.ObjectStorage.HttpService.HttpServiceClient)">
+	    <!-- ReSharper disable once MarkupAttributeTypo -->
+	    <member name="M:EventService.Features.Ticket.IssueATicket.IssueATicketCommandRequestHandler.#ctor(EventService.Infrastructure.Interfaces.IBaseEventService,EventService.ObjectStorage.HttpService.HttpServiceClient,MediatR.IMediator)">
             <summary>
             Конструктор
             </summary>
         </member>
-        <member name="M:EventService.Features.Ticket.Commands.IssueATicket.IssueATicketCommandRequestHandler.Handle(EventService.Features.Ticket.Commands.IssueATicket.IssueATicketCommand,System.Threading.CancellationToken)">
+        <member name="M:EventService.Features.Ticket.IssueATicket.IssueATicketCommandRequestHandler.Handle(EventService.Features.Ticket.IssueATicket.IssueATicketCommand,System.Threading.CancellationToken)">
             <summary>
             Обработчик
             </summary>
         </member>
-        <member name="T:EventService.Features.Ticket.Commands.SetFreeTickets.SetFreeTicketsCommand">
+        <member name="T:EventService.Features.Ticket.IssueATicket.notifications.CanclellationPayment.CancellationPaymentEvent">
+            <summary>
+            Событие отмены платежной операции 
+            </summary>
+        </member>
+        <member name="P:EventService.Features.Ticket.IssueATicket.notifications.CanclellationPayment.CancellationPaymentEvent.IdPayment">
+            <summary>
+            Id Платежной операции
+            </summary>
+        </member>
+        <member name="T:EventService.Features.Ticket.IssueATicket.notifications.CanclellationPayment.CancellationPaymentEventHandler">
+            <summary>
+            Отмена платежной операции
+            </summary>
+        </member>
+        <member name="M:EventService.Features.Ticket.IssueATicket.notifications.CanclellationPayment.CancellationPaymentEventHandler.#ctor(EventService.ObjectStorage.HttpService.HttpServiceClient)">
+            <summary>
+            Конструктор
+            </summary>
+        </member>
+        <member name="M:EventService.Features.Ticket.IssueATicket.notifications.CanclellationPayment.CancellationPaymentEventHandler.Handle(EventService.Features.Ticket.IssueATicket.notifications.CanclellationPayment.CancellationPaymentEvent,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:EventService.Features.Ticket.IssueATicket.notifications.ConfirmationPayment.ConfirmationPaymentEvent">
+            <summary>
+            Событие подтверждения платежной операции
+            </summary>
+        </member>
+        <member name="P:EventService.Features.Ticket.IssueATicket.notifications.ConfirmationPayment.ConfirmationPaymentEvent.IdPayment">
+            <summary>
+            Id платежной операции
+            </summary>
+        </member>
+        <member name="T:EventService.Features.Ticket.IssueATicket.notifications.ConfirmationPayment.ConfirmationPaymentEventHandler">
+            <summary>
+            Подтверждение платежной операции 
+            </summary>
+        </member>
+        <member name="M:EventService.Features.Ticket.IssueATicket.notifications.ConfirmationPayment.ConfirmationPaymentEventHandler.#ctor(EventService.ObjectStorage.HttpService.HttpServiceClient)">
+            <summary>
+            Конструктор
+            </summary>
+        </member>
+        <member name="M:EventService.Features.Ticket.IssueATicket.notifications.ConfirmationPayment.ConfirmationPaymentEventHandler.Handle(EventService.Features.Ticket.IssueATicket.notifications.ConfirmationPayment.ConfirmationPaymentEvent,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:EventService.Features.Ticket.SetFreeTickets.SetFreeTicketsCommand">
             <summary>
             Команда заполнения мероприятия бесплатными билетами
             </summary>
         </member>
-        <member name="P:EventService.Features.Ticket.Commands.SetFreeTickets.SetFreeTicketsCommand.IdEvent">
+        <member name="P:EventService.Features.Ticket.SetFreeTickets.SetFreeTicketsCommand.IdEvent">
             <summary>
             Id мероприятия
             </summary>
         </member>
-        <member name="P:EventService.Features.Ticket.Commands.SetFreeTickets.SetFreeTicketsCommand.Count">
+        <member name="P:EventService.Features.Ticket.SetFreeTickets.SetFreeTicketsCommand.Count">
             <summary>
             Количества билетов
             </summary>
         </member>
-        <member name="P:EventService.Features.Ticket.Commands.SetFreeTickets.SetFreeTicketsCommand.IsAutoGeneratePlaces">
+        <member name="P:EventService.Features.Ticket.SetFreeTickets.SetFreeTicketsCommand.IsAutoGeneratePlaces">
             <summary>
             Поле указывающая: требуется ли автогенерация мест для билетов
             </summary>
         </member>
-        <member name="T:EventService.Features.Ticket.Commands.SetFreeTickets.SetFreeTicketsCommandRequestHandler">
+        <member name="T:EventService.Features.Ticket.SetFreeTickets.SetFreeTicketsCommandRequestHandler">
             <summary>
             Класс обработчик заполнения мероприятия бесплатными билетами
             </summary>
         </member>
-        <member name="M:EventService.Features.Ticket.Commands.SetFreeTickets.SetFreeTicketsCommandRequestHandler.#ctor(EventService.Models.Interfaces.IBaseEventService)">
+        <member name="M:EventService.Features.Ticket.SetFreeTickets.SetFreeTicketsCommandRequestHandler.#ctor(EventService.Infrastructure.Interfaces.IBaseEventService)">
             <summary>
             Конструктор
             </summary>
         </member>
-        <member name="M:EventService.Features.Ticket.Commands.SetFreeTickets.SetFreeTicketsCommandRequestHandler.Handle(EventService.Features.Ticket.Commands.SetFreeTickets.SetFreeTicketsCommand,System.Threading.CancellationToken)">
+        <member name="M:EventService.Features.Ticket.SetFreeTickets.SetFreeTicketsCommandRequestHandler.Handle(EventService.Features.Ticket.SetFreeTickets.SetFreeTicketsCommand,System.Threading.CancellationToken)">
             <summary>
             Обработчик
             </summary>
         </member>
-        <member name="T:EventService.Features.User.Commands.IsExists.UserExistsCommand">
+        <member name="T:EventService.Features.Ticket.Ticket">
+            <summary>
+            Билет
+            </summary>
+        </member>
+        <member name="P:EventService.Features.Ticket.Ticket.Id">
+            <summary>
+            Id билета
+            </summary>
+        </member>
+        <member name="P:EventService.Features.Ticket.Ticket.IdOwner">
+            <summary>
+            Id владельца
+            </summary>
+        </member>
+        <member name="P:EventService.Features.Ticket.Ticket.Seat">
+            <summary>
+            Место
+            </summary>
+        </member>
+        <member name="T:EventService.Features.User.IsExists.UserExistsCommand">
             <summary>
             Команда проверки наличия пользователя
             </summary>
         </member>
-        <member name="P:EventService.Features.User.Commands.IsExists.UserExistsCommand.Id">
+        <member name="P:EventService.Features.User.IsExists.UserExistsCommand.Id">
             <summary>
             Id пользователя
             </summary>
         </member>
-        <member name="T:EventService.Features.User.Commands.IsExists.UserExistsCommandQueryHandler">
+        <member name="T:EventService.Features.User.IsExists.UserExistsCommandQueryHandler">
             <summary>
             Класс обработчик команды проверки наличия пользователя
             </summary>
         </member>
-        <member name="M:EventService.Features.User.Commands.IsExists.UserExistsCommandQueryHandler.#ctor(EventService.Models.Interfaces.IBaseUserService)">
+        <member name="M:EventService.Features.User.IsExists.UserExistsCommandQueryHandler.#ctor(EventService.Infrastructure.Interfaces.IBaseUserService)">
             <summary>
             Конструктор
             </summary>
         </member>
-        <member name="M:EventService.Features.User.Commands.IsExists.UserExistsCommandQueryHandler.Handle(EventService.Features.User.Commands.IsExists.UserExistsCommand,System.Threading.CancellationToken)">
+        <member name="M:EventService.Features.User.IsExists.UserExistsCommandQueryHandler.Handle(EventService.Features.User.IsExists.UserExistsCommand,System.Threading.CancellationToken)">
             <summary>
             Обработчик
+            </summary>
+        </member>
+        <member name="T:EventService.Features.User.User">
+            <summary>
+            Пользователь
+            </summary>
+        </member>
+        <member name="P:EventService.Features.User.User.Id">
+            <summary>
+            Id пользователя
+            </summary>
+        </member>
+        <member name="P:EventService.Features.User.User.Nickname">
+            <summary>
+            Ник пользователя
             </summary>
         </member>
         <member name="T:EventService.Identity.Selector">
@@ -686,7 +998,7 @@
             Конструктор с начальной инициализацией Базы данных
             </summary>
         </member>
-        <member name="M:EventService.Infrastructure.InterfaceImplements.EventMongoDbService.CreateEvent(System.DateTime,System.DateTime,System.String,System.String,System.Guid,System.Guid)">
+        <member name="M:EventService.Infrastructure.InterfaceImplements.EventMongoDbService.CreateEvent(EventService.Features.Event.Event)">
             <summary>
             Метод создания мероприятия 
             </summary>
@@ -706,277 +1018,117 @@
             Метод получения всех мероприятий на неделю
             </summary>
         </member>
-        <member name="M:EventService.Infrastructure.InterfaceImplements.EventMongoDbService.SetFreeTickets(System.Int32,System.Guid,System.Boolean)">
+        <member name="M:EventService.Infrastructure.InterfaceImplements.EventMongoDbService.SetFreeTickets(EventService.Features.Event.Event)">
              <summary>
             Метод заполения бесплатных билетов на определённое мероприятие
              </summary>
         </member>
-        <member name="M:EventService.Infrastructure.InterfaceImplements.EventMongoDbService.IssueTicket(System.Guid,System.Guid)">
+        <member name="M:EventService.Infrastructure.InterfaceImplements.EventMongoDbService.IssueTicket(EventService.Features.Event.Event)">
             <summary>
             Метод выдачи билета на мероприятие
             </summary>
         </member>
-        <member name="M:EventService.Infrastructure.InterfaceImplements.EventMongoDbService.HaveATicket(System.Guid,System.Guid)">
+        <member name="M:EventService.Infrastructure.InterfaceImplements.EventMongoDbService.HaveATicket(EventService.Features.Event.Event,System.Guid)">
             <summary>
             Метод проверки наличия билета у пользователя на мероприятие
             </summary>
         </member>
-        <member name="M:EventService.Infrastructure.InterfaceImplements.EventMongoDbService.UpdateEvent(System.Guid,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.String,System.Nullable{System.Guid},System.Nullable{System.Guid})">
+        <member name="M:EventService.Infrastructure.InterfaceImplements.EventMongoDbService.UpdateEvent(EventService.Features.Event.Event)">
             <summary>
             Метод обновления мероприятия
             </summary>
         </member>
-        <member name="M:EventService.Infrastructure.InterfaceImplements.EventMongoDbService.CheckSeat(System.Guid,System.Guid)">
+        <member name="M:EventService.Infrastructure.InterfaceImplements.EventMongoDbService.CheckSeat(EventService.Features.Event.Event,System.Guid)">
             <summary>
             Метод проверки наличия места у билета
             </summary>
         </member>
-        <member name="M:EventService.Infrastructure.InterfaceImplements.EventMongoDbService.RemoveEventImageById(System.Guid)">
+        <member name="M:EventService.Infrastructure.InterfaceImplements.EventMongoDbService.GetEventById(System.Guid)">
             <summary>
-            Метод удаления изображения мероприятия
+            Получить мероприятие
             </summary>
-            <param name="idevent"></param>
+            <param name="idevent">id мероприятия</param>
             <returns></returns>
         </member>
-        <member name="M:EventService.Infrastructure.InterfaceImplements.EventMongoDbService.RemoveSpaceEventById(System.Guid)">
-            <summary>
-            Метод удаления пространства мероприятия
-            </summary>
-            <param name="idevent"></param>
-            <returns></returns>
-        </member>
-        <member name="T:EventService.Models.Entities.Event">
-            <summary>
-            Класс Мероприятия
-            </summary>
-        </member>
-        <member name="P:EventService.Models.Entities.Event.Id">
-            <summary>
-            Id мероприятия
-            </summary>
-        </member>
-        <member name="P:EventService.Models.Entities.Event.Start">
-            <summary>
-            Дата начала мероприятия
-            </summary>
-        </member>
-        <member name="P:EventService.Models.Entities.Event.End">
-            <summary>
-            Дата окончания мероприятия
-            </summary>
-        </member>
-        <member name="P:EventService.Models.Entities.Event.Title">
-            <summary>
-            Название мероприятия
-            </summary>
-        </member>
-        <member name="P:EventService.Models.Entities.Event.Description">
-            <summary>
-            Описание мероприятия
-            </summary>
-        </member>
-        <member name="P:EventService.Models.Entities.Event.IdImage">
-            <summary>
-            Id изображения мероприятия
-            </summary>
-        </member>
-        <member name="P:EventService.Models.Entities.Event.IdSpace">
-            <summary>
-            Id пространства мероприятия
-            </summary>
-        </member>
-        <member name="P:EventService.Models.Entities.Event.Tickets">
-            <summary>
-            Билеты на мероприятие
-            </summary>
-        </member>
-        <member name="P:EventService.Models.Entities.Event.HaveTicketsSeats">
-            <summary>
-            Флаг наличия мест у билетов
-            </summary>
-        </member>
-        <member name="P:EventService.Models.Entities.Event.IsTicketsAvailable">
-            <summary>
-            Проверка наличия свободных билетов
-            </summary>
-        </member>
-        <member name="P:EventService.Models.Entities.Event.Price">
-            <summary>
-            Цена за билет
-            </summary>
-        </member>
-        <member name="T:EventService.Models.Entities.EventMessage">
-            <summary>
-            Модель Событийного сообщения
-            </summary>
-        </member>
-        <member name="P:EventService.Models.Entities.EventMessage.Type">
-            <summary>
-            Тип события
-            </summary>
-        </member>
-        <member name="P:EventService.Models.Entities.EventMessage.IdEntity">
-            <summary>
-            Id элемента
-            </summary>
-        </member>
-        <member name="T:EventService.Models.Entities.TypeEvent">
-            <summary>
-            Типы событий
-            </summary>
-        </member>
-        <member name="F:EventService.Models.Entities.TypeEvent.SpaceDeleteEvent">
-            <summary>
-            Событие удаления пространства
-            </summary>
-        </member>
-        <member name="F:EventService.Models.Entities.TypeEvent.ImageDeleteEvent">
-            <summary>
-            Событие удаление изображения
-            </summary>
-        </member>
-        <member name="F:EventService.Models.Entities.TypeEvent.EventDeleteEvent">
-            <summary>
-            Событие удаление мероприятия
-            </summary>
-        </member>
-        <member name="T:EventService.Models.Entities.Ticket">
-            <summary>
-            Билет
-            </summary>
-        </member>
-        <member name="P:EventService.Models.Entities.Ticket.Id">
-            <summary>
-            Id билета
-            </summary>
-        </member>
-        <member name="P:EventService.Models.Entities.Ticket.IdOwner">
-            <summary>
-            Id владельца
-            </summary>
-        </member>
-        <member name="P:EventService.Models.Entities.Ticket.Seat">
-            <summary>
-            Место
-            </summary>
-        </member>
-        <member name="T:EventService.Models.Entities.User">
-            <summary>
-            Пользователь
-            </summary>
-        </member>
-        <member name="P:EventService.Models.Entities.User.Id">
-            <summary>
-            Id пользователя
-            </summary>
-        </member>
-        <member name="P:EventService.Models.Entities.User.Nickname">
-            <summary>
-            Ник пользователя
-            </summary>
-        </member>
-        <member name="T:EventService.Models.Interfaces.IBaseEventService">
+        <member name="T:EventService.Infrastructure.Interfaces.IBaseEventService">
             <summary>
             Интерфейс для сервисов мероприятий
             </summary>
         </member>
-        <member name="M:EventService.Models.Interfaces.IBaseEventService.CreateEvent(System.DateTime,System.DateTime,System.String,System.String,System.Guid,System.Guid)">
+        <member name="M:EventService.Infrastructure.Interfaces.IBaseEventService.CreateEvent(EventService.Features.Event.Event)">
             <summary>
             Метод создания мероприятия
             </summary>
-            <param name="start">Начало</param>
-            <param name="end">Конец</param>
-            <param name="title">Название</param>
-            <param name="description">описание</param>
-            <param name="idimage">изображение</param>
-            <param name="idspace">пространство</param>
+            <param name="eventDefault">Мероприятие</param>
             <returns>Результат добавления</returns>
         </member>
-        <member name="M:EventService.Models.Interfaces.IBaseEventService.UpdateEvent(System.Guid,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.String,System.Nullable{System.Guid},System.Nullable{System.Guid})">
+        <member name="M:EventService.Infrastructure.Interfaces.IBaseEventService.UpdateEvent(EventService.Features.Event.Event)">
             <summary>
             Метод обновления мероприятия
             </summary>
-            <param name="start">Начало</param>
-            <param name="end">Конец</param>
-            <param name="title">Название</param>
-            <param name="description">описание</param>
-            <param name="idimage">изображение</param>
-            <param name="idspace">пространство</param>
-            <param name="idevent">событие</param>
-            <returns>Результат обновления</returns>
+            <param name="updateEvent">Мероприятие</param>
         </member>
-        <member name="M:EventService.Models.Interfaces.IBaseEventService.DeleteEvent(System.Guid)">
+        <member name="M:EventService.Infrastructure.Interfaces.IBaseEventService.DeleteEvent(System.Guid)">
             <summary>
             удаление мероприятия
             </summary>
             <param name="idevent">мероприятие</param>
             <returns>результат удаления</returns>
         </member>
-        <member name="M:EventService.Models.Interfaces.IBaseEventService.GetAllEvents">
+        <member name="M:EventService.Infrastructure.Interfaces.IBaseEventService.GetAllEvents">
             <summary>
             Получение всех мероприятий
             </summary>
             <returns>Список мероприятий</returns>
         </member>
-        <member name="M:EventService.Models.Interfaces.IBaseEventService.GetAllEventsForTheWeek">
+        <member name="M:EventService.Infrastructure.Interfaces.IBaseEventService.GetAllEventsForTheWeek">
             <summary>
             Получения мероприятий на неделю
             </summary>
             <returns>Список мероприятий</returns>
         </member>
-        <member name="M:EventService.Models.Interfaces.IBaseEventService.SetFreeTickets(System.Int32,System.Guid,System.Boolean)">
+        <member name="M:EventService.Infrastructure.Interfaces.IBaseEventService.SetFreeTickets(EventService.Features.Event.Event)">
             <summary>
             Заполение мероприятия бесплатными билетами
             </summary>
-            <param name="count">количество билетов</param>
-            <param name="idevent">мероприятие</param>
-            <param name="isautogeneratedplaces">флаг автозаполения мест</param>
+            <param name="eventDefault">мероприятие</param>
             <returns>Результат заполнения</returns>
         </member>
-        <member name="M:EventService.Models.Interfaces.IBaseEventService.IssueTicket(System.Guid,System.Guid)">
+        <member name="M:EventService.Infrastructure.Interfaces.IBaseEventService.IssueTicket(EventService.Features.Event.Event)">
             <summary>
             Выдача билета на мероприятие
             </summary>
-            <param name="idevent">мероприятия</param>
-            <param name="idowner">пользователь</param>
-            <returns>Билет</returns>
+            <param name="eventDefault">мероприятия</param>
+            <returns>Результат</returns>
         </member>
-        <member name="M:EventService.Models.Interfaces.IBaseEventService.HaveATicket(System.Guid,System.Guid)">
+        <member name="M:EventService.Infrastructure.Interfaces.IBaseEventService.HaveATicket(EventService.Features.Event.Event,System.Guid)">
             <summary>
             Проверка наличия билета на мероприятие
             </summary>
-            <param name="idevent">мероприятие</param>
+            <param name="eventDefault">мероприятие</param>
             <param name="idowner">пользователь</param>
             <returns>наличие билета</returns>
         </member>
-        <member name="M:EventService.Models.Interfaces.IBaseEventService.CheckSeat(System.Guid,System.Guid)">
+        <member name="M:EventService.Infrastructure.Interfaces.IBaseEventService.CheckSeat(EventService.Features.Event.Event,System.Guid)">
             <summary>
              Проверка наличия места у билета
             </summary>
-            <param name="idevent">мероприятие</param>
+            <param name="eventDefault">мероприятие</param>
             <param name="idticket">билет</param>
             <returns>место либо null</returns>
         </member>
-        <member name="M:EventService.Models.Interfaces.IBaseEventService.RemoveEventImageById(System.Guid)">
+        <member name="M:EventService.Infrastructure.Interfaces.IBaseEventService.GetEventById(System.Guid)">
             <summary>
-            Удаление изображения мероприятия
+            Получения мероприятия по Id
             </summary>
             <param name="idevent"></param>
-            <returns></returns>
         </member>
-        <member name="M:EventService.Models.Interfaces.IBaseEventService.RemoveSpaceEventById(System.Guid)">
-            <summary>
-            Удаление пространства мероприятия
-            </summary>
-            <param name="idevent"></param>
-            <returns></returns>
-        </member>
-        <member name="T:EventService.Models.Interfaces.IBaseRabbitMqService">
+        <member name="T:EventService.Infrastructure.Interfaces.IBaseRabbitMqService">
             <summary>
             Интерфейс для работы RabbitMq
             </summary>
         </member>
-        <member name="M:EventService.Models.Interfaces.IBaseRabbitMqService.SendMessage``1(``0,System.String)">
+        <member name="M:EventService.Infrastructure.Interfaces.IBaseRabbitMqService.SendMessage``1(``0,System.String)">
             <summary>
             отправление сообщение в очередь
             </summary>
@@ -984,12 +1136,12 @@
             <param name="queyename"></param>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="T:EventService.Models.Interfaces.IBaseUserService">
+        <member name="T:EventService.Infrastructure.Interfaces.IBaseUserService">
             <summary>
             Интерфейс для сервисов пользователей
             </summary>
         </member>
-        <member name="M:EventService.Models.Interfaces.IBaseUserService.IsUserExists(System.Guid)">
+        <member name="M:EventService.Infrastructure.Interfaces.IBaseUserService.IsUserExists(System.Guid)">
             <summary>
             проверка наличия пользователя
             </summary>
@@ -1049,56 +1201,6 @@
         </member>
         <member name="M:EventService.ObjectStorage.RabbitMqService.BaseRabbitMqService.Dispose">
             <inheritdoc />
-        </member>
-        <member name="T:EventService.ObjectStorage.ViewModels.EventViewModel">
-            <summary>
-            View model для мероприятия
-            </summary>
-        </member>
-        <member name="P:EventService.ObjectStorage.ViewModels.EventViewModel.Id">
-            <summary>
-            Id мероприятия
-            </summary>
-        </member>
-        <member name="P:EventService.ObjectStorage.ViewModels.EventViewModel.Start">
-            <summary>
-            Дата начала мероприятия
-            </summary>
-        </member>
-        <member name="P:EventService.ObjectStorage.ViewModels.EventViewModel.Title">
-            <summary>
-            Название мероприятия
-            </summary>
-        </member>
-        <member name="P:EventService.ObjectStorage.ViewModels.EventViewModel.Description">
-            <summary>
-            Описание мероприятия
-            </summary>
-        </member>
-        <member name="P:EventService.ObjectStorage.ViewModels.EventViewModel.IdImage">
-            <summary>
-            Id изображения мероприятия
-            </summary>
-        </member>
-        <member name="P:EventService.ObjectStorage.ViewModels.EventViewModel.IdSpace">
-            <summary>
-            Id пространства мероприятия
-            </summary>
-        </member>
-        <member name="P:EventService.ObjectStorage.ViewModels.EventViewModel.HaveTicketsSeats">
-            <summary>
-            Флаг наличия мест у билетов
-            </summary>
-        </member>
-        <member name="P:EventService.ObjectStorage.ViewModels.EventViewModel.IsTicketsAvailable">
-            <summary>
-            Проверка наличия свободных билетов
-            </summary>
-        </member>
-        <member name="P:EventService.ObjectStorage.ViewModels.EventViewModel.Price">
-            <summary>
-            цена
-            </summary>
         </member>
         <member name="T:EventService.ObjectStorage.ViewModels.Mappers.EventServiceMapper">
             <summary>

@@ -1,8 +1,7 @@
-﻿using EventService.Models.Interfaces;
-using FluentValidation.AspNetCore;
+﻿using FluentValidation.AspNetCore;
 using FluentValidation;
 using System.Reflection;
-
+using EventService.Features.Filters;
 using EventService.Identity;
 using IdentityModel.Client;
 using IdentityServer4.Services;
@@ -17,7 +16,10 @@ using Polly;
 using Polly.Extensions.Http;
 using EventService.ObjectStorage.HttpService;
 using EventService.ObjectStorage.RabbitMqService;
-
+using MediatR;
+using EventService.Infrastructure.Interfaces;
+using Microsoft.OpenApi.Models;
+using System.Net.Http.Headers;
 
 namespace EventService.ObjectStorage.Helpers;
 
@@ -31,10 +33,38 @@ public static class ServiceRegister
     /// </summary>
     public static void AddServices(this IServiceCollection services, IConfiguration appConfiguration)
     {
+        services.AddSwaggerGen(setup =>
+        {
+            // Include 'SecurityScheme' to use JWT Authentication
+            var jwtSecurityScheme = new OpenApiSecurityScheme
+            {
+                BearerFormat = "JWT",
+                Name = "JWT Authentication",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.Http,
+                Scheme = JwtBearerDefaults.AuthenticationScheme,
+                Description = "",
+
+                Reference = new OpenApiReference
+                {
+                    Id = JwtBearerDefaults.AuthenticationScheme,
+                    Type = ReferenceType.SecurityScheme
+                }
+            };
+
+            setup.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
+
+            setup.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                { jwtSecurityScheme, Array.Empty<string>() }
+            });
+
+        });
 
 #pragma warning disable CS0618
         services.AddControllers().AddFluentValidation(options => { options.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()); });
 #pragma warning restore CS0618
+        services.AddTransient(typeof(IPipelineBehavior<,>) ,typeof(ValidationBehavior<,>));
         services.AddSingleton(new MongoClient(appConfiguration["Mongodb"]));
         BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
 #pragma warning disable CS0618
@@ -72,20 +102,35 @@ public static class ServiceRegister
         services.AddSingleton<IBaseUserService, BaseUserService>();
   
         services.AddHttpClient();
-        services.AddHttpClient("image", client => client.BaseAddress = new Uri(appConfiguration["Httpclient:Image"]!)).AddPolicyHandler(_ =>
+        services.AddHttpClient("image", client =>
+        {
+            client.BaseAddress = new Uri(appConfiguration["Httpclient:Image"]!);
+           client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+        }).AddPolicyHandler(_ =>
         {
             return HttpPolicyExtensions.HandleTransientHttpError().OrResult(v => !v.IsSuccessStatusCode)
                 .WaitAndRetryAsync(2, attempt => TimeSpan.FromSeconds(3 * attempt)); 
         });
 
-        services.AddHttpClient("space",client=> client.BaseAddress = new Uri(appConfiguration["Httpclient:Space"]!)).AddPolicyHandler(_ =>
+        services.AddHttpClient("space",client=>
+        {
+            client.BaseAddress = new Uri(appConfiguration["Httpclient:Space"]!);
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+        }).AddPolicyHandler(_ =>
         {
             
             return HttpPolicyExtensions.HandleTransientHttpError().OrResult(v => !v.IsSuccessStatusCode)
                 .WaitAndRetryAsync(2, attempt => TimeSpan.FromSeconds(3 * attempt)); 
         });
 
-        services.AddHttpClient("payment", client => client.BaseAddress = new Uri(appConfiguration["Httpclient:Payment"]!)).AddPolicyHandler(_ =>
+        services.AddHttpClient("payment", client =>
+        {
+            client.BaseAddress = new Uri(appConfiguration["Httpclient:Payment"]!);
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+        }).AddPolicyHandler(_ =>
         {
             return HttpPolicyExtensions.HandleTransientHttpError().OrResult(v => !v.IsSuccessStatusCode)
                 .WaitAndRetryAsync(6, attempt => TimeSpan.FromSeconds(3 * attempt)); 

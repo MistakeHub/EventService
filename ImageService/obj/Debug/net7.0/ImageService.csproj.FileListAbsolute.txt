@@ -82,3 +82,4 @@ F:\OpporRepositories\EventService\ImageService\bin\Debug\net7.0\runtimes\win\nat
 F:\OpporRepositories\EventService\ImageService\bin\Debug\net7.0\EventService.dll
 F:\OpporRepositories\EventService\ImageService\bin\Debug\net7.0\EventService.pdb
 F:\OpporRepositories\EventService\ImageService\bin\Debug\net7.0\EventService.xml
+F:\OpporRepositories\EventService\ImageService\bin\Debug\net7.0\Newtonsoft.Json.Schema.dll

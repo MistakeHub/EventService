@@ -1,4 +1,4 @@
-﻿using EventService.Models.Entities;
+﻿using EventService.Features.RabbitMq;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text.Json;

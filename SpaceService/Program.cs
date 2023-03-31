@@ -3,6 +3,7 @@ using IdentityModel.Client;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.OpenApi.Models;
 using SC.Internship.Common.ScResult;
 using SpaceService.Models;
 
@@ -12,7 +13,33 @@ var appConfiguration = builder.Configuration;
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(setup =>
+{
+    // Include 'SecurityScheme' to use JWT Authentication
+    var jwtSecurityScheme = new OpenApiSecurityScheme
+    {
+        BearerFormat = "JWT",
+        Name = "JWT Authentication",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        Scheme = JwtBearerDefaults.AuthenticationScheme,
+        Description = "",
+
+        Reference = new OpenApiReference
+        {
+            Id = JwtBearerDefaults.AuthenticationScheme,
+            Type = ReferenceType.SecurityScheme
+        }
+    };
+
+    setup.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
+
+    setup.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        { jwtSecurityScheme, Array.Empty<string>() }
+    });
+
+});
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme,
     options =>
     {
@@ -61,7 +88,7 @@ var spaces = new[]
     new Guid("7febf16f-651b-43b0-a5e3-0da8da49e90d")
 };
 
-app.MapGet("/images/isspaceexists/{id}", [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)](string id) =>
+app.MapGet("/spaces/isspaceexists/{id}", [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)](string id) =>
     {
         var result = new ScResult<bool>
         {

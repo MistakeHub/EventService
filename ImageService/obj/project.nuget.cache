@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "RH22VAY0CQtGHx2PzKJHFSBskJdmPmyBRsIQrHqHaJb4xzmm+tQmoP0wFa7ynL8ArmI4B0Q9C0ZezEKo0pXfSA==",
+  "dgSpecHash": "i/k/kalLpmJ1CDktRCmhVx9CY7V8al7xv8lhvA2+BOiVZh8citY9PJbL7HrpSHvUWGwKneW8Y+ndUVnclbvzfA==",
   "success": true,
   "projectFilePath": "F:\\OpporRepositories\\EventService\\ImageService\\ImageService.csproj",
   "expectedPackageFiles": [
@@ -53,7 +53,8 @@
     "C:\\Users\\Shawn\\.nuget\\packages\\mongodb.driver\\2.19.0\\mongodb.driver.2.19.0.nupkg.sha512",
     "C:\\Users\\Shawn\\.nuget\\packages\\mongodb.driver.core\\2.19.0\\mongodb.driver.core.2.19.0.nupkg.sha512",
     "C:\\Users\\Shawn\\.nuget\\packages\\mongodb.libmongocrypt\\1.7.0\\mongodb.libmongocrypt.1.7.0.nupkg.sha512",
-    "C:\\Users\\Shawn\\.nuget\\packages\\newtonsoft.json\\13.0.2\\newtonsoft.json.13.0.2.nupkg.sha512",
+    "C:\\Users\\Shawn\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\Shawn\\.nuget\\packages\\newtonsoft.json.schema\\3.0.14\\newtonsoft.json.schema.3.0.14.nupkg.sha512",
     "C:\\Users\\Shawn\\.nuget\\packages\\polly\\7.2.3\\polly.7.2.3.nupkg.sha512",
     "C:\\Users\\Shawn\\.nuget\\packages\\polly.extensions.http\\3.0.0\\polly.extensions.http.3.0.0.nupkg.sha512",
     "C:\\Users\\Shawn\\.nuget\\packages\\rabbitmq.client\\6.5.0\\rabbitmq.client.6.5.0.nupkg.sha512",
